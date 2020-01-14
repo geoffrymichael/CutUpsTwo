@@ -14,6 +14,8 @@
 		63953A9223CBC07E0033ACFF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63953A9123CBC07E0033ACFF /* Preview Assets.xcassets */; };
 		63953A9523CBC07E0033ACFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63953A9323CBC07E0033ACFF /* LaunchScreen.storyboard */; };
 		63953A9D23CBC0AB0033ACFF /* TextInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63953A9C23CBC0AB0033ACFF /* TextInputController.swift */; };
+		63953AA423CD2E950033ACFF /* LyricsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63953AA323CD2E950033ACFF /* LyricsController.swift */; };
+		63953AA623CD3F380033ACFF /* ScrapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63953AA523CD3F380033ACFF /* ScrapTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		63953A9423CBC07E0033ACFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63953A9623CBC07E0033ACFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63953A9C23CBC0AB0033ACFF /* TextInputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputController.swift; sourceTree = "<group>"; };
+		63953AA323CD2E950033ACFF /* LyricsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsController.swift; sourceTree = "<group>"; };
+		63953AA523CD3F380033ACFF /* ScrapTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 			children = (
 				63953A8823CBC07B0033ACFF /* AppDelegate.swift */,
 				63953A9C23CBC0AB0033ACFF /* TextInputController.swift */,
+				63953AA323CD2E950033ACFF /* LyricsController.swift */,
+				63953AA523CD3F380033ACFF /* ScrapTableViewCell.swift */,
 				63953A8A23CBC07B0033ACFF /* SceneDelegate.swift */,
 				63953A8C23CBC07B0033ACFF /* ContentView.swift */,
 				63953A8E23CBC07E0033ACFF /* Assets.xcassets */,
@@ -150,9 +156,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				63953A8923CBC07B0033ACFF /* AppDelegate.swift in Sources */,
+				63953AA423CD2E950033ACFF /* LyricsController.swift in Sources */,
 				63953A9D23CBC0AB0033ACFF /* TextInputController.swift in Sources */,
 				63953A8B23CBC07B0033ACFF /* SceneDelegate.swift in Sources */,
 				63953A8D23CBC07B0033ACFF /* ContentView.swift in Sources */,
+				63953AA623CD3F380033ACFF /* ScrapTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
