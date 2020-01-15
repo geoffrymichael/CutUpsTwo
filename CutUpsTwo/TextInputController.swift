@@ -48,15 +48,67 @@ class TextInputController: UIViewController, UITextViewDelegate {
         
         lyricTextView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
         lyricTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
-//        lyricTextView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -50).isActive = true
         lyricTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         
         lyricTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
         
+        //Create a container for buttons
+        let buttonContainer = UIView()
+        buttonContainer.translatesAutoresizingMaskIntoConstraints = false
+        buttonContainer.backgroundColor = .systemRed
+        
+        lyricTextView.addSubview(buttonContainer)
+        
+        buttonContainer.bottomAnchor.constraint(equalTo: lyricTextView.bottomAnchor, constant: 100).isActive = true
+        buttonContainer.widthAnchor.constraint(equalTo: lyricTextView.widthAnchor).isActive = true
+        buttonContainer.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        let sendButton = UIButton(type: .system)
+        sendButton.setTitle("Cut", for: .normal)
+        sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        sendButton.backgroundColor = .green
+        
+        
+        buttonContainer.addSubview(sendButton)
+        
+        
+        
+        sendButton.topAnchor.constraint(equalTo: buttonContainer.topAnchor).isActive = true
+        sendButton.bottomAnchor.constraint(equalTo: buttonContainer.bottomAnchor).isActive = true
+        sendButton.widthAnchor.constraint(equalTo: buttonContainer.widthAnchor).isActive = true
+        
+        
+        
+//        let sendButton = UIButton(type: .system)
+//        sendButton.setTitle("Send", for: .normal)
+//        sendButton.translatesAutoresizingMaskIntoConstraints = false
+//
+//        lyricTextView.addSubview(sendButton)
+//
+//        sendButton.rightAnchor.constraint(equalTo: lyricTextView.rightAnchor).isActive = true
+//        sendButton.centerYAnchor.constraint(equalTo: lyricTextView.centerYAnchor).isActive = true
+//        sendButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
+//        sendButton.heightAnchor.constraint(equalTo: lyricTextView.heightAnchor).isActive = true
+//        sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
+        
     }
+    
+    @objc func handleSend() {
+        let textVC = LyricsController()
+
+        print("Hello")
+        
+        present(textVC, animated: true, completion: nil)
  
+        
+    }
     
 }
+
+
 
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
