@@ -101,7 +101,9 @@ class TextInputController: UIViewController, UITextViewDelegate {
 
         print("Hello")
         
-        present(textVC, animated: true, completion: nil)
+//        present(textVC, animated: true, completion: nil)
+        
+        navigationController?.pushViewController(textVC, animated: true)
  
         
     }
