@@ -47,7 +47,7 @@ class TextInputController: UIViewController, UITextViewDelegate {
         view.addSubview(lyricTextView)
         
         lyricTextView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
-        lyricTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        lyricTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200).isActive = true
         lyricTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         
         lyricTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
@@ -57,11 +57,15 @@ class TextInputController: UIViewController, UITextViewDelegate {
         buttonContainer.translatesAutoresizingMaskIntoConstraints = false
         buttonContainer.backgroundColor = .systemRed
         
-        lyricTextView.addSubview(buttonContainer)
+        view.addSubview(buttonContainer)
         
-        buttonContainer.bottomAnchor.constraint(equalTo: lyricTextView.bottomAnchor, constant: 100).isActive = true
-        buttonContainer.widthAnchor.constraint(equalTo: lyricTextView.widthAnchor).isActive = true
+        buttonContainer.topAnchor.constraint(equalTo: lyricTextView.bottomAnchor).isActive = true
         buttonContainer.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        buttonContainer.leftAnchor.constraint(equalTo: lyricTextView.leftAnchor).isActive = true
+        buttonContainer.widthAnchor.constraint(equalTo: lyricTextView.widthAnchor).isActive = true
+//        buttonContainer.bottomAnchor.constraint(equalTo: lyricTextView.bottomAnchor, constant: 100).isActive = true
+//        buttonContainer.widthAnchor.constraint(equalTo: lyricTextView.widthAnchor).isActive = true
+//        buttonContainer.heightAnchor.constraint(equalToConstant: 100).isActive = true
         
         let sendButton = UIButton(type: .system)
         sendButton.setTitle("Cut", for: .normal)
