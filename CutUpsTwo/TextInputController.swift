@@ -9,6 +9,10 @@
 import UIKit
 
 class TextInputController: UIViewController, UITextViewDelegate {
+    
+    
+    var scrapsToShare = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemBlue
@@ -103,12 +107,32 @@ class TextInputController: UIViewController, UITextViewDelegate {
     @objc func handleSend() {
         let textVC = LyricsController()
 
-        print("Hello")
+          let lyricRange = lyricTextView.selectedRange
+                
+                
+                lyricTextView.selectedRange = NSRange(location: 0, length: lyricRange.location)
+                
+
+                
+                lyricTextView.cut(self)
+                
+                let cutText = UIPasteboard.general.string
+
+                
+                
+                
+                
+                       
+                
+                let sanitizedCutText = cutText?.filter { !"\n".contains($0) }
         
-//        present(textVC, animated: true, completion: nil)
+        scrapsToShare.append(sanitizedCutText ?? "No go")
         
+        textVC.scraps = scrapsToShare
+
         navigationController?.pushViewController(textVC, animated: true)
- 
+        
+        print(sanitizedCutText as Any, "🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️")
         
     }
     

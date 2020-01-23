@@ -10,7 +10,9 @@ import UIKit
 
 class LyricsController: UITableViewController, UITableViewDragDelegate, UITableViewDropDelegate {
     
-    var scraps = ["If there is a bustle in your headgrow", "Dont't be alarmed then", "It's only a sprinkling for the may queen", "There's a lady who's sure", "And she's buying a stairway to heaven", "Rings of smoke through the trees"]
+//    var scraps = ["If there is a bustle in your headgrow", "Dont't be alarmed then", "It's only a sprinkling for the may queen", "There's a lady who's sure", "And she's buying a stairway to heaven", "Rings of smoke through the trees"]
+    
+    var scraps = [String]()
     
     let scrapCell = "scrapCell"
     
