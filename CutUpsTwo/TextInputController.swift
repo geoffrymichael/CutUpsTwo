@@ -17,6 +17,8 @@ class TextInputController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         self.view.backgroundColor = .systemBlue
         
+        NotificationCenter.default.addObserver(self, selector: #selector(systemCut(notification:)), name: UIMenuController.didHideMenuNotification, object: nil)
+        
         setupLyricTextView()
         
 //        view.addSubview(lyricTextView)
@@ -42,6 +44,7 @@ class TextInputController: UIViewController, UITextViewDelegate {
         
         
         
+        
         return view
     }()
     
@@ -49,6 +52,8 @@ class TextInputController: UIViewController, UITextViewDelegate {
     func setupLyricTextView() {
         
         view.addSubview(lyricTextView)
+        
+        
         
         lyricTextView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
         lyricTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200).isActive = true
@@ -101,6 +106,15 @@ class TextInputController: UIViewController, UITextViewDelegate {
 //        sendButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
 //        sendButton.heightAnchor.constraint(equalTo: lyricTextView.heightAnchor).isActive = true
 //        sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
+        
+    }
+    
+    @objc func systemCut(notification: Notification) {
+        print(notification.name.rawValue, "🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️")
+        
+        print(UIPasteboard.general.string)
+        
+        lyricTextView.cut(self)
         
     }
     
