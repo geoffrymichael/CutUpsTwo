@@ -17,8 +17,8 @@ class TextInputController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         self.view.backgroundColor = .systemBlue
         
-        NotificationCenter.default.addObserver(self, selector: #selector(systemCut(notification:)), name: UIMenuController.didHideMenuNotification, object: nil)
-        
+//        NotificationCenter.default.addObserver(self, selector: #selector(systemCut(notification:)), name: UIMenuController.didHideMenuNotification, object: nil)
+
         setupLyricTextView()
         
 //        view.addSubview(lyricTextView)
@@ -110,39 +110,44 @@ class TextInputController: UIViewController, UITextViewDelegate {
     }
     
     @objc func systemCut(notification: Notification) {
-        print(notification.name.rawValue, "🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️")
+        print(notification.description, "🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️")
         
         print(UIPasteboard.general.string)
         
-        lyricTextView.cut(self)
+        scrapsToShare.append(UIPasteboard.general.string ?? "default")
+        
         
     }
     
     @objc func handleSend() {
         let textVC = LyricsController()
 
-          let lyricRange = lyricTextView.selectedRange
-                
-                
-                lyricTextView.selectedRange = NSRange(location: 0, length: lyricRange.location)
-                
-
-                
-                lyricTextView.cut(self)
-                
-                let cutText = UIPasteboard.general.string
-
-                
-                
-                
-                
-                       
-                
-                let sanitizedCutText = cutText?.filter { !"\n".contains($0) }
+//          let lyricRange = lyricTextView.selectedRange
+//
+//
+//                lyricTextView.selectedRange = NSRange(location: 0, length: lyricRange.location)
+//
+//
+//
+//                lyricTextView.cut(self)
+//
+//                let cutText = UIPasteboard.general.string
+//
+//
+//
+//
+//
+//
+//
+//                let sanitizedCutText = cutText?.filter { !"\n".contains($0) }
+        
+        let sanitizedCutText = UIPasteboard.general.string
         
         scrapsToShare.append(sanitizedCutText ?? "No go")
         
         textVC.scraps = scrapsToShare
+        
+        
 
         navigationController?.pushViewController(textVC, animated: true)
         
