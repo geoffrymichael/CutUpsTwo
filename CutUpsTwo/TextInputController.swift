@@ -18,7 +18,16 @@ class TextInputController: UIViewController, UITextViewDelegate {
         self.view.backgroundColor = .systemBlue
         
 //        NotificationCenter.default.addObserver(self, selector: #selector(systemCut(notification:)), name: UIMenuController.didHideMenuNotification, object: nil)
-
+        
+        let menuItem = UIMenuItem()
+        menuItem.title = "snip"
+        
+        
+        
+        menuItem.action = #selector(systemCut)
+        
+        UIMenuController.shared.menuItems = Array([menuItem])
+        
         setupLyricTextView()
         
 //        view.addSubview(lyricTextView)
@@ -95,26 +104,18 @@ class TextInputController: UIViewController, UITextViewDelegate {
         
         
         
-//        let sendButton = UIButton(type: .system)
-//        sendButton.setTitle("Send", for: .normal)
-//        sendButton.translatesAutoresizingMaskIntoConstraints = false
-//
-//        lyricTextView.addSubview(sendButton)
-//
-//        sendButton.rightAnchor.constraint(equalTo: lyricTextView.rightAnchor).isActive = true
-//        sendButton.centerYAnchor.constraint(equalTo: lyricTextView.centerYAnchor).isActive = true
-//        sendButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
-//        sendButton.heightAnchor.constraint(equalTo: lyricTextView.heightAnchor).isActive = true
-//        sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
+
         
     }
     
-    @objc func systemCut(notification: Notification) {
-        print(notification.description, "🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️")
+    @IBAction func systemCut() {
+//        print(notification.description, "🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️")
+//
+//        print(UIPasteboard.general.string)
+//
+//        scrapsToShare.append(UIPasteboard.general.string ?? "default")
         
-        print(UIPasteboard.general.string)
-        
-        scrapsToShare.append(UIPasteboard.general.string ?? "default")
+        print("🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️")
         
         
     }
