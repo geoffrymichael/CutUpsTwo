@@ -13,13 +13,20 @@ class TextInputController: UIViewController, UITextViewDelegate {
     
     var scrapsToShare = [String]()
     
+    var scrap: String? {
+        didSet {
+            scrapToSendView.text = scrap
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemBlue
         
 //        NotificationCenter.default.addObserver(self, selector: #selector(systemCut(notification:)), name: UIMenuController.didHideMenuNotification, object: nil)
         
-    
+      NotificationCenter.default.addObserver(self, selector: #selector(clipboardChanged),
+        name: UIPasteboard.changedNotification, object: nil)
         
         setupLyricTextView()
         
@@ -39,6 +46,7 @@ class TextInputController: UIViewController, UITextViewDelegate {
     lazy var scrapToSendView: UITextView = {
         let view = UITextView()
         view.backgroundColor = .white
+        view.text = "Yo"
         
         view.delegate = self
         
@@ -136,6 +144,15 @@ class TextInputController: UIViewController, UITextViewDelegate {
         print("🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️")
         
         
+    }
+    
+    @objc func clipboardChanged(){
+        let pasteboardString: String? = UIPasteboard.general.string
+        if let theString = pasteboardString {
+            scrap = theString
+            print("String is \(theString)")
+            // Do cool things with the string
+        }
     }
     
     @objc func handleSend() {
