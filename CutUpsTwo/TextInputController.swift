@@ -19,14 +19,7 @@ class TextInputController: UIViewController, UITextViewDelegate {
         
 //        NotificationCenter.default.addObserver(self, selector: #selector(systemCut(notification:)), name: UIMenuController.didHideMenuNotification, object: nil)
         
-        let menuItem = UIMenuItem()
-        menuItem.title = "snip"
-        
-        
-        
-        menuItem.action = #selector(systemCut)
-        
-        UIMenuController.shared.menuItems = Array([menuItem])
+    
         
         setupLyricTextView()
         
@@ -41,6 +34,19 @@ class TextInputController: UIViewController, UITextViewDelegate {
 //        }
         return .portrait
     }
+    
+    
+    lazy var scrapToSendView: UITextView = {
+        let view = UITextView()
+        view.backgroundColor = .white
+        
+        view.delegate = self
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        return view
+    }()
     
     lazy var lyricTextView: UITextView = {
         let view = UITextView()
@@ -64,11 +70,23 @@ class TextInputController: UIViewController, UITextViewDelegate {
         
         
         
+        
+        
+        
         lyricTextView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
         lyricTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200).isActive = true
         lyricTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         
         lyricTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        
+        
+        view.addSubview(scrapToSendView)
+        
+        scrapToSendView.centerXAnchor.constraint(equalTo: lyricTextView.centerXAnchor).isActive = true
+        scrapToSendView.bottomAnchor.constraint(equalTo: lyricTextView.topAnchor, constant: -8).isActive = true
+        scrapToSendView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        scrapToSendView.widthAnchor.constraint(equalTo: lyricTextView.widthAnchor).isActive = true
+        
         
         //Create a container for buttons
         let buttonContainer = UIView()
