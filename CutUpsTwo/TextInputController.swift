@@ -31,7 +31,7 @@ class TextInputController: UIViewController, UITextViewDelegate {
         
         setupLyricTextView()
         
-//        view.addSubview(lyricTextView)
+
     }
     
     //UILabel needs to be subclassed in order to create edge insets for its text
@@ -97,21 +97,22 @@ class TextInputController: UIViewController, UITextViewDelegate {
         
         view.addSubview(buttonContainer)
         
-        buttonContainer.topAnchor.constraint(equalTo: lyricTextView.bottomAnchor).isActive = true
-        buttonContainer.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        buttonContainer.topAnchor.constraint(equalTo: lyricTextView.bottomAnchor, constant: 8).isActive = true
+        buttonContainer.heightAnchor.constraint(equalToConstant: 50).isActive = true
         buttonContainer.leftAnchor.constraint(equalTo: lyricTextView.leftAnchor).isActive = true
         buttonContainer.widthAnchor.constraint(equalTo: lyricTextView.widthAnchor).isActive = true
-//        buttonContainer.bottomAnchor.constraint(equalTo: lyricTextView.bottomAnchor, constant: 100).isActive = true
-//        buttonContainer.widthAnchor.constraint(equalTo: lyricTextView.widthAnchor).isActive = true
-//        buttonContainer.heightAnchor.constraint(equalToConstant: 100).isActive = true
+
         
+           
         let sendButton = UIButton(type: .system)
-        sendButton.setTitle("Cut", for: .normal)
+        sendButton.setTitle("Send to Table", for: .normal)
+        sendButton.titleLabel?.textColor = .black
+        
         sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         
-        sendButton.backgroundColor = .green
+        sendButton.backgroundColor = .systemGray
         
         
         buttonContainer.addSubview(sendButton)
@@ -128,18 +129,7 @@ class TextInputController: UIViewController, UITextViewDelegate {
         
     }
     
-    @IBAction func systemCut() {
-//        print(notification.description, "🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️")
-//
-//        print(UIPasteboard.general.string)
-//
-//        scrapsToShare.append(UIPasteboard.general.string ?? "default")
-        
-        print("🧛‍♂️🧛‍♂️🧛‍♂️🧛‍♂️")
-        
-        
-    }
-    
+   
     @objc func clipboardChanged(){
         let pasteboardString: String? = UIPasteboard.general.string
         if let theString = pasteboardString {
@@ -156,19 +146,11 @@ class TextInputController: UIViewController, UITextViewDelegate {
 //
 //
 //                lyricTextView.selectedRange = NSRange(location: 0, length: lyricRange.location)
-//
-//
-//
+
 //                lyricTextView.cut(self)
 //
 //                let cutText = UIPasteboard.general.string
-//
-//
-//
-//
-//
-//
-//
+
 //                let sanitizedCutText = cutText?.filter { !"\n".contains($0) }
         
         let sanitizedCutText = UIPasteboard.general.string
