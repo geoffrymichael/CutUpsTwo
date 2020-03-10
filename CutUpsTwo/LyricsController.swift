@@ -75,6 +75,18 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
         }
     }
     
+    //TODO: This is to do stuff when the view dismisses. Currently it is empty 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if self.isMovingFromParent {
+            
+            self.dismiss(animated: true, completion: {
+                
+            })
+        }
+    }
+    
     //Delete functionality
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
       if editingStyle == .delete {
@@ -101,7 +113,9 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
         for item in coordinator.items {
             if let sourceIndexPath = item.sourceIndexPath {
                 if let lyric = item.dragItem.localObject as! NSString? {
-                    tableView.performBatchUpdates( { scraps.remove(at: sourceIndexPath.item); scraps.insert(lyric as String, at: destinationIndexPath.item) ; tableView.deleteRows(at: [sourceIndexPath], with: .automatic); tableView.insertRows(at: [destinationIndexPath], with: .automatic) } )
+//                    tableView.performBatchUpdates( { scraps.remove(at: sourceIndexPath.item); scraps.insert(lyric as String, at: destinationIndexPath.item) ; tableView.deleteRows(at: [sourceIndexPath], with: .automatic); tableView.insertRows(at: [destinationIndexPath], with: .automatic) } )
+                    
+                    tableView.performBatchUpdates( { scraps.swapAt(sourceIndexPath.item, destinationIndexPath.item) ; tableView.deleteRows(at: [sourceIndexPath], with: .automatic); tableView.insertRows(at: [destinationIndexPath], with: .automatic) } )
                     
                     print(lyric)
                     tableView.reloadData()
