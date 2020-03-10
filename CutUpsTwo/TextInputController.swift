@@ -15,7 +15,8 @@ class TextInputController: UIViewController, UITextViewDelegate {
     
     var scrap: String? {
         didSet {
-            scrapToSendView.text = scrap
+            previewLabel.text = scrap
+            previewLabel.textColor = .black
         }
     }
     
@@ -33,28 +34,26 @@ class TextInputController: UIViewController, UITextViewDelegate {
 //        view.addSubview(lyricTextView)
     }
     
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-//        if UIDevice.current.userInterfaceIdiom == .phone {
-//            return .allButUpsideDown
-//        } else {
-//            return .all
-//        }
-        return .portrait
+    //UILabel needs to be subclassed in order to create edge insets for its text
+    class PreviewLabel: UILabel {
+        override func drawText(in rect: CGRect) {
+            let insets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+            super.drawText(in: rect.inset(by: insets))
+        }
+        
     }
     
-    
-    lazy var scrapToSendView: UITextView = {
-        let view = UITextView()
-        view.backgroundColor = .white
-        view.text = "Yo"
+    lazy var previewLabel: PreviewLabel = {
+        let label = PreviewLabel()
+        label.textColor = .systemGray
+        label.text = "Text Preview"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = .white
         
-        view.delegate = self
-        
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-        return view
+        return label
     }()
+    
+
     
     lazy var lyricTextView: UITextView = {
         let view = UITextView()
@@ -75,12 +74,7 @@ class TextInputController: UIViewController, UITextViewDelegate {
     func setupLyricTextView() {
         
         view.addSubview(lyricTextView)
-        
-        
-        
-        
-        
-        
+                
         lyricTextView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
         lyricTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200).isActive = true
         lyricTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
@@ -88,12 +82,12 @@ class TextInputController: UIViewController, UITextViewDelegate {
         lyricTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
         
         
-        view.addSubview(scrapToSendView)
-        
-        scrapToSendView.centerXAnchor.constraint(equalTo: lyricTextView.centerXAnchor).isActive = true
-        scrapToSendView.bottomAnchor.constraint(equalTo: lyricTextView.topAnchor, constant: -8).isActive = true
-        scrapToSendView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        scrapToSendView.widthAnchor.constraint(equalTo: lyricTextView.widthAnchor).isActive = true
+        view.addSubview(previewLabel)
+
+        previewLabel.centerXAnchor.constraint(equalTo: lyricTextView.centerXAnchor).isActive = true
+        previewLabel.bottomAnchor.constraint(equalTo: lyricTextView.topAnchor, constant: -8).isActive = true
+        previewLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        previewLabel.widthAnchor.constraint(equalTo: lyricTextView.widthAnchor).isActive = true
         
         
         //Create a container for buttons
