@@ -8,8 +8,15 @@
 
 import UIKit
 
+class ScrapsToShareData {
+    var array: [String] = []
+}
+
 class TextInputController: UIViewController, UITextViewDelegate {
     
+    
+    
+    var scrapsToShareData = ScrapsToShareData()
     
     var scrapsToShare = [String]()
     
@@ -133,7 +140,10 @@ class TextInputController: UIViewController, UITextViewDelegate {
         let pasteboardString: String? = UIPasteboard.general.string
         if let theString = pasteboardString {
             scrap = theString
-            scrapsToShare.append(theString)
+//            scrapsToShare.append(theString)
+            
+            scrapsToShareData.array.append(theString)
+            
             print(scrapsToShare)
             // Do cool things with the string
         }
@@ -157,9 +167,9 @@ class TextInputController: UIViewController, UITextViewDelegate {
 //
 //        scrapsToShare.append(sanitizedCutText ?? "No go")
         
-        textVC.scraps = scrapsToShare
+        textVC.scraps = scrapsToShareData.array
         
-        scrapsToShare = []
+        
         scrap = ""
 
         navigationController?.pushViewController(textVC, animated: true)
