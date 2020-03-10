@@ -45,7 +45,7 @@ class TextInputController: UIViewController, UITextViewDelegate {
     
     lazy var previewLabel: PreviewLabel = {
         let label = PreviewLabel()
-        label.textColor = .systemGray
+        label.textColor = .placeholderText
         label.text = "Text Preview"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .white
@@ -58,6 +58,7 @@ class TextInputController: UIViewController, UITextViewDelegate {
     lazy var lyricTextView: UITextView = {
         let view = UITextView()
         view.backgroundColor = UIColor.white
+        
         
         
         view.delegate = self
@@ -76,7 +77,7 @@ class TextInputController: UIViewController, UITextViewDelegate {
         view.addSubview(lyricTextView)
                 
         lyricTextView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
-        lyricTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200).isActive = true
+        lyricTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100).isActive = true
         lyricTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         
         lyricTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
@@ -93,7 +94,7 @@ class TextInputController: UIViewController, UITextViewDelegate {
         //Create a container for buttons
         let buttonContainer = UIView()
         buttonContainer.translatesAutoresizingMaskIntoConstraints = false
-        buttonContainer.backgroundColor = .systemRed
+        buttonContainer.backgroundColor = .darkGray
         
         view.addSubview(buttonContainer)
         
@@ -106,12 +107,9 @@ class TextInputController: UIViewController, UITextViewDelegate {
            
         let sendButton = UIButton(type: .system)
         sendButton.setTitle("Send to Table", for: .normal)
-        sendButton.titleLabel?.textColor = .black
-        
         sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         sendButton.translatesAutoresizingMaskIntoConstraints = false
-        
         sendButton.backgroundColor = .systemGray
         
         
@@ -121,7 +119,8 @@ class TextInputController: UIViewController, UITextViewDelegate {
         
         sendButton.topAnchor.constraint(equalTo: buttonContainer.topAnchor).isActive = true
         sendButton.bottomAnchor.constraint(equalTo: buttonContainer.bottomAnchor).isActive = true
-        sendButton.widthAnchor.constraint(equalTo: buttonContainer.widthAnchor).isActive = true
+        sendButton.leftAnchor.constraint(equalTo: buttonContainer.leftAnchor).isActive = true
+        sendButton.rightAnchor.constraint(equalTo: buttonContainer.centerXAnchor).isActive = true
         
         
         
@@ -134,7 +133,8 @@ class TextInputController: UIViewController, UITextViewDelegate {
         let pasteboardString: String? = UIPasteboard.general.string
         if let theString = pasteboardString {
             scrap = theString
-            print("String is \(theString)")
+            scrapsToShare.append(theString)
+            print(scrapsToShare)
             // Do cool things with the string
         }
     }
@@ -153,17 +153,18 @@ class TextInputController: UIViewController, UITextViewDelegate {
 
 //                let sanitizedCutText = cutText?.filter { !"\n".contains($0) }
         
-        let sanitizedCutText = UIPasteboard.general.string
-        
-        scrapsToShare.append(sanitizedCutText ?? "No go")
+//        let sanitizedCutText = UIPasteboard.general.string
+//
+//        scrapsToShare.append(sanitizedCutText ?? "No go")
         
         textVC.scraps = scrapsToShare
         
-        
+        scrapsToShare = []
+        scrap = ""
 
         navigationController?.pushViewController(textVC, animated: true)
         
-        print(sanitizedCutText as Any, "🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️")
+//        print(sanitizedCutText as Any, "🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️")
         
     }
     

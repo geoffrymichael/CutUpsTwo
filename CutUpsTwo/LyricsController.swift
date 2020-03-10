@@ -75,6 +75,16 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
         }
     }
     
+    //Delete functionality
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+      if editingStyle == .delete {
+        print("Deleted")
+
+        self.scraps.remove(at: indexPath.row)
+        self.tableView.deleteRows(at: [indexPath], with: .automatic)
+      }
+    }
+    
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
         let destinationIndexPath: IndexPath
         
