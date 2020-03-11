@@ -12,9 +12,14 @@ class ScrapsToShareData {
     var array: [String] = []
 }
 
-class TextInputController: UIViewController, UITextViewDelegate {
+class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArrayDelegate {
     
+    func onSend(scraps: [String]) {
+        print(scraps)
+        scrapsToShareData.array = scraps
+    }
     
+        
     
     var scrapsToShareData = ScrapsToShareData()
     
@@ -30,6 +35,10 @@ class TextInputController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemBlue
+        
+        
+        let vc = LyricsController()
+        vc.scrapsSendDelegate = self
         
 //        NotificationCenter.default.addObserver(self, selector: #selector(systemCut(notification:)), name: UIMenuController.didHideMenuNotification, object: nil)
         
@@ -151,6 +160,8 @@ class TextInputController: UIViewController, UITextViewDelegate {
     
     @objc func handleSend() {
         let textVC = LyricsController()
+        
+        textVC.scrapsSendDelegate = self
 
 //          let lyricRange = lyricTextView.selectedRange
 //

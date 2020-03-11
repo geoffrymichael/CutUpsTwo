@@ -8,11 +8,15 @@
 
 import UIKit
 
+protocol SendScrapsArrayDelegate: class {
+    func onSend(scraps: [String])
+}
+
 class LyricsController: UITableViewController, UITableViewDragDelegate, UITableViewDropDelegate {
     
 //    var scraps = ["If there is a bustle in your headgrow", "Dont't be alarmed then", "It's only a sprinkling for the may queen", "There's a lady who's sure", "And she's buying a stairway to heaven", "Rings of smoke through the trees"]
     
-    
+    weak var scrapsSendDelegate: SendScrapsArrayDelegate?
     
     
     let scrapCell = "scrapCell"
@@ -86,7 +90,8 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
         if self.isMovingFromParent {
             
             self.dismiss(animated: true, completion: {
-                
+                print("something")
+                self.scrapsSendDelegate?.onSend(scraps: self.scraps)
             })
         }
     }
