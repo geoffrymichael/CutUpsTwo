@@ -19,8 +19,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         scrapsToShareData.array = scraps
     }
     
-        
-    
+     
     var scrapsToShareData = ScrapsToShareData()
     
     var scrapsToShare = [String]()
@@ -32,10 +31,15 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         }
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemBlue
         
+        let edit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: Selector(("handleSend")))
+            
+            
+        self.navigationItem.leftBarButtonItem = edit
         
         let vc = LyricsController()
         vc.scrapsSendDelegate = self
