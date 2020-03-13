@@ -37,7 +37,20 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         self.view.backgroundColor = .systemBlue
         
         let edit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: Selector(("handleSend")))
+        
+        
+        //TODO: Want to impliment dimiss keyboard on tap of editing view. Currently this only works by clickin on the super view.
+        NotificationCenter.default.addObserver(self.lyricTextView, selector: #selector(clipboardChanged),
+        name: UIPasteboard.changedNotification, object: nil)
+        
             
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        //tap.cancelsTouchesInView = false
+
+        view.addGestureRecognizer(tap)
             
         self.navigationItem.leftBarButtonItem = edit
         
@@ -46,8 +59,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
 //        NotificationCenter.default.addObserver(self, selector: #selector(systemCut(notification:)), name: UIMenuController.didHideMenuNotification, object: nil)
         
-      NotificationCenter.default.addObserver(self, selector: #selector(clipboardChanged),
-        name: UIPasteboard.changedNotification, object: nil)
+      
         
         setupLyricTextView()
         
@@ -80,8 +92,9 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         view.backgroundColor = UIColor.white
         
         
-        
         view.delegate = self
+        
+        
         
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -189,6 +202,11 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
     }
     
    
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
     @objc func clipboardChanged(){
         let pasteboardString: String? = UIPasteboard.general.string
         if let theString = pasteboardString {
