@@ -29,6 +29,9 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
         super.viewDidLoad()
         
         
+        //This is needed to account for safe area
+        tableView.contentInset = UIEdgeInsets(top: 0, left: UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.left ?? 0.0, bottom: 0, right: 0.0)
+        
         tableView.dragDelegate = self
         tableView.dragInteractionEnabled = true
         tableView.dropDelegate = self
