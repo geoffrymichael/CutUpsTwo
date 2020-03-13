@@ -91,57 +91,97 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         return view
     }()
     
+    //ToDo, perhaps impliment landscape orientation contextual changes
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: { context in
+            
+            print(UIDevice.current.orientation.isLandscape)
+            
+        })
+    }
+    
     
     func setupLyricTextView() {
         
-        view.addSubview(lyricTextView)
-                
-        lyricTextView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
-        lyricTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100).isActive = true
-        lyricTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         
-        lyricTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
         
         
         view.addSubview(previewLabel)
-
-        previewLabel.centerXAnchor.constraint(equalTo: lyricTextView.centerXAnchor).isActive = true
-        previewLabel.bottomAnchor.constraint(equalTo: lyricTextView.topAnchor, constant: -8).isActive = true
-        previewLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        previewLabel.widthAnchor.constraint(equalTo: lyricTextView.widthAnchor).isActive = true
+        
+        
+        let margins = view.layoutMarginsGuide
+        NSLayoutConstraint.activate([
+           previewLabel.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+           previewLabel.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+           previewLabel.topAnchor.constraint(equalTo: margins.topAnchor, constant: 8),
+            previewLabel.heightAnchor.constraint(equalToConstant: 50)
+        ])
+        
+        view.addSubview(lyricTextView)
+        
+        NSLayoutConstraint.activate([
+            lyricTextView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+            lyricTextView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+            lyricTextView.widthAnchor.constraint(equalTo: previewLabel.widthAnchor),
+            lyricTextView.topAnchor.constraint(equalTo: previewLabel.bottomAnchor, constant: 8),
+            lyricTextView.bottomAnchor.constraint(equalTo: margins.bottomAnchor)
+        
+        ])
+        
+        
+//        previewLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+//
+//        previewLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+//
+//        previewLabel.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+//
+//        previewLabel.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        
+//        previewLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+//        previewLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+//        previewLabel.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+//        previewLabel.centerXAnchor.constraint(equalTo: lyricTextView.centerXAnchor).isActive = true
+        
+        
+        
+                
+//        lyricTextView.topAnchor.constraint(equalTo: previewLabel.bottomAnchor).isActive = true
+//        lyricTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100).isActive = true
+//        lyricTextView.widthAnchor.constraint(equalTo: previewLabel.widthAnchor).isActive = true
+        
         
         
         //Create a container for buttons
-        let buttonContainer = UIView()
-        buttonContainer.translatesAutoresizingMaskIntoConstraints = false
-        buttonContainer.backgroundColor = .darkGray
-        
-        view.addSubview(buttonContainer)
-        
-        buttonContainer.topAnchor.constraint(equalTo: lyricTextView.bottomAnchor, constant: 8).isActive = true
-        buttonContainer.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        buttonContainer.leftAnchor.constraint(equalTo: lyricTextView.leftAnchor).isActive = true
-        buttonContainer.widthAnchor.constraint(equalTo: lyricTextView.widthAnchor).isActive = true
-
-        
-           
-        let sendButton = UIButton(type: .system)
-        sendButton.setTitle("Send to Table", for: .normal)
-        sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
-        sendButton.translatesAutoresizingMaskIntoConstraints = false
-        sendButton.translatesAutoresizingMaskIntoConstraints = false
-        sendButton.backgroundColor = .systemGray
-        
-        
-        buttonContainer.addSubview(sendButton)
-        
-        
-        
-        sendButton.topAnchor.constraint(equalTo: buttonContainer.topAnchor).isActive = true
-        sendButton.bottomAnchor.constraint(equalTo: buttonContainer.bottomAnchor).isActive = true
-        sendButton.leftAnchor.constraint(equalTo: buttonContainer.leftAnchor).isActive = true
-        sendButton.rightAnchor.constraint(equalTo: buttonContainer.centerXAnchor).isActive = true
-        
+//        let buttonContainer = UIView()
+//        buttonContainer.translatesAutoresizingMaskIntoConstraints = false
+//        buttonContainer.backgroundColor = .darkGray
+//
+//        view.addSubview(buttonContainer)
+//
+//        buttonContainer.topAnchor.constraint(equalTo: lyricTextView.bottomAnchor, constant: 8).isActive = true
+//        buttonContainer.heightAnchor.constraint(equalToConstant: 50).isActive = true
+//        buttonContainer.leftAnchor.constraint(equalTo: lyricTextView.leftAnchor).isActive = true
+//        buttonContainer.widthAnchor.constraint(equalTo: lyricTextView.widthAnchor).isActive = true
+//
+//
+//
+//        let sendButton = UIButton(type: .system)
+//        sendButton.setTitle("Send to Table", for: .normal)
+//        sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
+//        sendButton.translatesAutoresizingMaskIntoConstraints = false
+//        sendButton.translatesAutoresizingMaskIntoConstraints = false
+//        sendButton.backgroundColor = .systemGray
+//
+//
+//        buttonContainer.addSubview(sendButton)
+//
+//
+//
+//        sendButton.topAnchor.constraint(equalTo: buttonContainer.topAnchor).isActive = true
+//        sendButton.bottomAnchor.constraint(equalTo: buttonContainer.bottomAnchor).isActive = true
+//        sendButton.leftAnchor.constraint(equalTo: buttonContainer.leftAnchor).isActive = true
+//        sendButton.rightAnchor.constraint(equalTo: buttonContainer.centerXAnchor).isActive = true
+//
         
         
 
