@@ -29,8 +29,14 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
         super.viewDidLoad()
         
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Shuffle", style: .plain, target: self, action: #selector(onShuffle))
+        
+        
         //This is needed to account for safe area
-        tableView.contentInset = UIEdgeInsets(top: 0, left: UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.left ?? 0.0, bottom: 0, right: 0.0)
+        if UIDevice.current.orientation.isLandscape {
+            tableView.contentInset = UIEdgeInsets(top: 0, left: UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.left ?? 0.0, bottom: 0, right: 0.0)
+        }
+        
         
         tableView.dragDelegate = self
         tableView.dragInteractionEnabled = true
@@ -38,6 +44,27 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
         
         
         tableView.register(ScrapTableViewCell.self, forCellReuseIdentifier: scrapCell)
+    }
+    
+    @objc func onShuffle() {
+        print("Shuffled")
+        tableView.performBatchUpdates( { scraps.shuffle() } )
+         
+        tableView.reloadData()
+    }
+    
+    
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: { context in
+            
+            if UIDevice.current.orientation.isLandscape {
+                self.tableView.contentInset = UIEdgeInsets(top: 0, left: UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.left ?? 0.0, bottom: 0, right: 0.0)
+                self.tableView.reloadData()
+                
+            }
+            
+        })
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -139,6 +166,46 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
     }
     
     
+}
+
+extension Int {
+    
+    ///
+    /// Get a random number between `self` and 0. If `self` is zero,
+    /// zero will be returned.
+    ///
+    var arc4random: Int {
+        if self > 0 {
+            return Int(arc4random_uniform(UInt32(self)))
+        }
+        else if self < 0 {
+            return -Int(arc4random_uniform(UInt32(abs(self))))
+        }
+        else {
+            return 0
+        }
+        
+    }
+}
+
+extension MutableCollection {
+    
+    /// Shuffle the elements of `self` in-place.
+    mutating func shuffle() {
+        
+        // Shuffle logic retrieved from:
+        // https://stackoverflow.com/questions/37843647/shuffle-array-swift-3/37843901
+        
+        // Empty and single-element collections don't shuffle
+        if count < 2 { return }
+        
+        // Shuffle them
+        for i in indices.dropLast() {
+            let diff = distance(from: i, to: endIndex)
+            let j = index(i, offsetBy: numericCast(arc4random_uniform(numericCast(diff))))
+            swapAt(i, j)
+        }
+    }
 }
 
 

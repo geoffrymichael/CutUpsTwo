@@ -38,10 +38,8 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
         let edit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: Selector(("handleSend")))
         
-        
-        //TODO: Want to impliment dimiss keyboard on tap of editing view. Currently this only works by clickin on the super view.
-        NotificationCenter.default.addObserver(self.lyricTextView, selector: #selector(clipboardChanged),
-        name: UIPasteboard.changedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(clipboardChanged),
+        name: UIPasteboard.changedNotification, object: nil)        
         
             
         //Looks for single or multiple taps.
@@ -252,7 +250,6 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
     }
     
 }
-
 
 
 #if canImport(SwiftUI) && DEBUG
