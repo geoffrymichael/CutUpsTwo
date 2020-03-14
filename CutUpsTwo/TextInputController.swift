@@ -37,6 +37,11 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         self.view.backgroundColor = .systemBlue
         
         let edit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: Selector(("handleSend")))
+        self.navigationItem.leftBarButtonItem = edit
+        
+//TODO: Messing around with automatic parsing
+
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Automatic", style: .plain, target: self, action: #selector(automaticCut))
         
         NotificationCenter.default.addObserver(self, selector: #selector(clipboardChanged),
         name: UIPasteboard.changedNotification, object: nil)        
@@ -50,7 +55,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
 
         view.addGestureRecognizer(tap)
             
-        self.navigationItem.leftBarButtonItem = edit
+        
         
         let vc = LyricsController()
         vc.scrapsSendDelegate = self
@@ -240,6 +245,8 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
         textVC.scraps = scrapsToShareData.array
         
+        print(lyricTextView.text!)
+        
         
         scrap = ""
 
@@ -249,7 +256,41 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
     }
     
+    @objc func automaticCut() {
+        
+        
+             for (index, text) in lyricTextView.text!.enumerated() {
+
+                       var selected = String()
+                       
+                       
+                       
+                       if text.isNewline {
+                           
+                           
+                           lyricTextView.selectedRange = NSRange(location: 0, length: index)
+                           lyricTextView.cut(self)
+                           
+                           selected = UIPasteboard.general.string ?? "empty"
+                        let trimmed = selected.filter { !$0.isNewline }
+                        // In Swift 1.2 (Xcode 6.3):
+                           scrapsToShareData.array.append(trimmed)
+                           
+                           print("🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️",scrapsToShareData.array)
+                           
+                           
+                       }
+                   }
+
+        let textVC = LyricsController()
+        textVC.scraps = scrapsToShareData.array
+        navigationController?.pushViewController(textVC, animated: true)
+        
+    }
+    
 }
+
+
 
 
 #if canImport(SwiftUI) && DEBUG
