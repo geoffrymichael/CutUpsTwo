@@ -39,7 +39,6 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         let edit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: Selector(("handleSend")))
         self.navigationItem.leftBarButtonItem = edit
         
-//TODO: Messing around with automatic parsing
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Automatic", style: .plain, target: self, action: #selector(automaticCut))
         
@@ -257,34 +256,17 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
     }
     
     @objc func automaticCut() {
-        
-        
-             for (index, text) in lyricTextView.text!.enumerated() {
+        lyricTextView.text.enumerateLines { line, _ in
+            
+            self.scrapsToShareData.array.append(line)
 
-                       var selected = String()
-                       
-                       
-                       
-                       if text.isNewline {
-                           
-                           
-                           lyricTextView.selectedRange = NSRange(location: 0, length: index)
-                           lyricTextView.cut(self)
-                           
-                           selected = UIPasteboard.general.string ?? "empty"
-                        let trimmed = selected.filter { !$0.isNewline }
-                        // In Swift 1.2 (Xcode 6.3):
-                           scrapsToShareData.array.append(trimmed)
-                           
-                           print("🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️🧝🏼‍♀️",scrapsToShareData.array)
-                           
-                           
-                       }
-                   }
+        }
+        
 
         let textVC = LyricsController()
         textVC.scraps = scrapsToShareData.array
         navigationController?.pushViewController(textVC, animated: true)
+        
         
     }
     
