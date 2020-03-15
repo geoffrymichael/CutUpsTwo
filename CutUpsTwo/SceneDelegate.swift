@@ -31,28 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.makeKeyAndVisible()
         }
         
-        
-        
-//        if let windowScene = scene as? UIWindowScene {
-//            let window = UIWindow(windowScene: windowScene)
-////            window.rootViewController = UINavigationController(rootViewController: LyricsController())
-//
-//            let splitViewConrtoller = UISplitViewController()
-//
-//            let tableViewVC = LyricsController()
-//            let mainVC = TextInputController()
-//
-//            splitViewConrtoller.viewControllers = [tableViewVC, mainVC]
-//
-//            splitViewConrtoller.preferredPrimaryColumnWidthFraction = 1/3
-//
-//            window.rootViewController = splitViewConrtoller
-//
-//            self.window = window
-//            window.makeKeyAndVisible()
-//
-//
-//        }
+
         
         
         
