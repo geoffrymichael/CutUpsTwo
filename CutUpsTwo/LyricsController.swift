@@ -29,8 +29,13 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
         super.viewDidLoad()
         
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Shuffle", style: .plain, target: self, action: #selector(onShuffle))
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Shuffle", style: .plain, target: self, action: #selector(onShuffle))
         
+        let shuffleButton = UIBarButtonItem(title: "Shuffle", style: .plain, target: self, action: #selector(onShuffle))
+        
+        let shareButton = UIBarButtonItem(title: "Share", style: .plain, target: self, action: #selector(onShare))
+        
+        self.navigationItem.setRightBarButtonItems([shareButton,shuffleButton], animated: true)
         
         //This is needed to account for safe area
         if UIDevice.current.orientation.isLandscape {
@@ -53,6 +58,16 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
         tableView.reloadData()
     }
     
+    @objc func onShare() {
+        print("shared")
+        
+        let joinedPoem = scrapsToShareData.array.joined()
+        print(joinedPoem)
+        
+        let activityVC = UIActivityViewController(activityItems: [joinedPoem], applicationActivities: nil)
+        
+        self.present(activityVC, animated: true, completion: nil)
+    }
     
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
