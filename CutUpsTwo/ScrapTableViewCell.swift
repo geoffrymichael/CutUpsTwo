@@ -48,10 +48,11 @@ class ScrapTableViewCell: UITableViewCell {
     
     lazy var lineTextLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.systemFont(ofSize: 14)
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Stuff"
+        label.numberOfLines = 0
         
         return label
         
