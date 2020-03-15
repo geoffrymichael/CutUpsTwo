@@ -23,6 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        let contentView = ContentView()
 
 //         Use a UIHostingController as window root view controller.
+        
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             window.rootViewController = UINavigationController(rootViewController: TextInputController())
@@ -34,14 +35,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
 //        if let windowScene = scene as? UIWindowScene {
 //            let window = UIWindow(windowScene: windowScene)
-//            window.rootViewController = UINavigationController(rootViewController: LyricsController())
+////            window.rootViewController = UINavigationController(rootViewController: LyricsController())
 //
 //            let splitViewConrtoller = UISplitViewController()
 //
 //            let tableViewVC = LyricsController()
 //            let mainVC = TextInputController()
 //
-//            splitViewConrtoller.viewControllers = [mainVC, tableViewVC]
+//            splitViewConrtoller.viewControllers = [tableViewVC, mainVC]
 //
 //            splitViewConrtoller.preferredPrimaryColumnWidthFraction = 1/3
 //
@@ -49,8 +50,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //
 //            self.window = window
 //            window.makeKeyAndVisible()
-//            
-//            
+//
+//
 //        }
         
         
