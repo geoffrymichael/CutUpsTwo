@@ -80,7 +80,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
     lazy var previewLabel: PreviewLabel = {
         let label = PreviewLabel()
         label.textColor = .placeholderText
-        label.text = "Text Preview"
+        label.text = "Most Recently Manually Cut/Copied Line"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .white
         
@@ -95,14 +95,9 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
         
         view.delegate = self
-        
-        
-        
+
         view.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-        
-        
+
         return view
     }()
     
@@ -118,9 +113,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
     
     func setupLyricTextView() {
         
-        
-        
-        
+
         view.addSubview(previewLabel)
         
         
@@ -255,6 +248,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
     }
     
+    //A function to parse text by carriage returns (by line)
     @objc func automaticCut() {
         lyricTextView.text.enumerateLines { line, _ in
             
@@ -262,10 +256,8 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
 
         }
         
-
-        let textVC = LyricsController()
-        textVC.scraps = scrapsToShareData.array
-        navigationController?.pushViewController(textVC, animated: true)
+        
+        lyricTextView.text = ""
         
         
     }
