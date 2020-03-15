@@ -24,6 +24,7 @@ class ScrapTableViewCell: UITableViewCell {
     var labelText: String? {
         didSet {
             lineTextLabel.text = labelText
+            
         }
     }
     
@@ -32,10 +33,12 @@ class ScrapTableViewCell: UITableViewCell {
         
         addSubview(lineTextLabel)
         
+        lineTextLabel.font = lineTextLabel.font.withSize(30)
+        
         lineTextLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         lineTextLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         lineTextLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-        lineTextLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+//        lineTextLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         
         

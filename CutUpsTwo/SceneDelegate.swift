@@ -22,13 +22,39 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Create the SwiftUI view that provides the window contents.
 //        let contentView = ContentView()
 
-        // Use a UIHostingController as window root view controller.
+//         Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             window.rootViewController = UINavigationController(rootViewController: TextInputController())
             self.window = window
             window.makeKeyAndVisible()
         }
+        
+        
+        
+//        if let windowScene = scene as? UIWindowScene {
+//            let window = UIWindow(windowScene: windowScene)
+//            window.rootViewController = UINavigationController(rootViewController: LyricsController())
+//
+//            let splitViewConrtoller = UISplitViewController()
+//
+//            let tableViewVC = LyricsController()
+//            let mainVC = TextInputController()
+//
+//            splitViewConrtoller.viewControllers = [mainVC, tableViewVC]
+//
+//            splitViewConrtoller.preferredPrimaryColumnWidthFraction = 1/3
+//
+//            window.rootViewController = splitViewConrtoller
+//
+//            self.window = window
+//            window.makeKeyAndVisible()
+//            
+//            
+//        }
+        
+        
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
