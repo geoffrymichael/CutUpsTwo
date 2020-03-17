@@ -14,6 +14,7 @@ class ScrapsToShareData {
 
 class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArrayDelegate {
     
+    
     func onSend(scraps: [String]) {
         print(scraps)
         scrapsToShareData.array = scraps
@@ -36,24 +37,22 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         super.viewDidLoad()
         self.view.backgroundColor = .systemBlue
         
+        self.lyricTextView.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
+        
         let edit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: Selector(("handleSend")))
         self.navigationItem.leftBarButtonItem = edit
         
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Automatic", style: .plain, target: self, action: #selector(automaticCut))
+        let automaticButton = UIBarButtonItem(title: "Automatic", style: .plain, target: self, action: #selector(automaticCut))
+        let helpButton = UIBarButtonItem(title: "Help", style: .plain, target: self, action: #selector(onHelp))
+        
+        self.navigationItem.setRightBarButtonItems([helpButton, automaticButton], animated: true)
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(clipboardChanged),
         name: UIPasteboard.changedNotification, object: nil)        
         
-            
-        //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-
-        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
-        //tap.cancelsTouchesInView = false
-
-        view.addGestureRecognizer(tap)
-            
+                
         
         
         let vc = LyricsController()
@@ -89,52 +88,16 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         return label
     }()
     
-   
-    
-    var placeholder = """
-    •) Paste any copied text here such as a poem or lyrics
-    
-    •) Any text that is separated by a "return" will be counted as a new line
 
-    •) You can use the "return" on the keboard to simulate cutting the text anywhere you want. Many source materials may already automatically have lines separated when you paste them in
     
-    •) Copying and pasting from different sources is a good way to get interesting blends
-        
-    •) When you are satisified with your formatting, clicking on "Automatic" will cut the text into lines and send them to the editing board
     
-    •) You can also use iOS' copy and paste to manually send a single line, words, or word to the editing board
-
-    •) To begin rearranging the lines, click on the "Edit" button
-    
-    •) Rearranging can be done manually by clicking on a line and dragging it, or automatically by clicking "shuffle"
-    
-    •) You can go back to the input screen and add more content at any time
-    
-    •) Export your rearranged lines via the "Share" button. Press "clear" to start over completely
-    """
-    
-    var placeholderLabel = UILabel()
     
     lazy var lyricTextView: UITextView = {
         let view = UITextView()
         view.backgroundColor = UIColor.white
         view.font = UIFont.systemFont(ofSize: 16)
         
-        
-        placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
-        placeholderLabel.numberOfLines = 0
-        
-        placeholderLabel.text = placeholder
-        placeholderLabel.font = UIFont.italicSystemFont(ofSize: (view.font?.pointSize)!)
-        placeholderLabel.sizeToFit()
-        view.addSubview(placeholderLabel)
-        
-        placeholderLabel.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        
-        placeholderLabel.frame.origin = CGPoint(x: 5, y: (view.font?.pointSize)! / 2)
-        placeholderLabel.textColor = UIColor.lightGray
-        placeholderLabel.isHidden = !view.text.isEmpty
-                    
+    
         
         view.delegate = self
 
@@ -143,9 +106,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         return view
     }()
     
-    func textViewDidChange(_ textView: UITextView) {
-           placeholderLabel.isHidden = !lyricTextView.text.isEmpty
-       }
+    
     
     //ToDo, perhaps impliment landscape orientation contextual changes
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -308,10 +269,34 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
     }
     
+    @objc func onHelp() {
+        print("Help Pressed")
+        
+        let vc = HelpViewController()
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func tapDone(sender: Any) {
+        self.view.endEditing(true)
+    }
+    
 }
 
-
-
+extension UITextView {
+    
+    func addDoneButton(title: String, target: Any, selector: Selector) {
+        
+        let toolBar = UIToolbar(frame: CGRect(x: 0.0,
+                                              y: 0.0,
+                                              width: UIScreen.main.bounds.size.width,
+                                              height: 44.0))//1
+        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)//2
+        let barButton = UIBarButtonItem(title: title, style: .plain, target: target, action: selector)//3
+        toolBar.setItems([flexible, barButton], animated: false)//4
+        self.inputAccessoryView = toolBar//5
+    }
+}
 
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
