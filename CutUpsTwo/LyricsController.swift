@@ -61,10 +61,12 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
     @objc func onShare() {
         print("shared")
         
-        let joinedPoem = scrapsToShareData.array.joined()
-        print(joinedPoem)
+        print(scraps.joined())
         
-        let activityVC = UIActivityViewController(activityItems: [joinedPoem], applicationActivities: nil)
+        let joinedScraps = scraps.joined(separator: "\n")
+        
+        
+        let activityVC = UIActivityViewController(activityItems: [joinedScraps], applicationActivities: nil)
         
         self.present(activityVC, animated: true, completion: nil)
     }
