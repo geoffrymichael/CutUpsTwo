@@ -92,29 +92,25 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
    
     
     var placeholder = """
-    •) Paste any copied text here such as a poem or lyrics
+    •) Paste any copy text here such as a poem or lyrics
     
-    •) Any text that is seprated by a "return" will be counted as new line
+    •) Any text that is separated by a "return" will be counted as a new line
+
+    •) You can use the "return" on the keboard to simulate cutting the text anywhere you want. Many source materials may already automatically have lines separated when you paste them in
     
     •) Copying and pasting from different sources is a good way to get interesting blends
+        
+    •) When you are satisified with your formatting, clicking on "Automatic" will cut the text into lines and send them to the editing board
     
-    •) You can use the return on the keboard to simulate cutting the text anywhere you want
-    
-    •) If you use this method you will see the most recently sent line in the preview window
-    
-    •) Clicking on "Automatic" will cut the text into lines and send them to the editing board
-    
-    •) You can also use copy and paste to manually send a single line, words, or word to the editing board
-    
+    •) You can also use iOS' copy and paste to manually send a single line, words, or word to the editing board
+
     •) To begin rearranging the lines, click on the "Edit" button
     
-    •) Rearranging can be done manually by clicking on a line and dragging it
+    •) Rearranging can be done manually by clicking on a line and dragging it, or automatically by clicking "shuffle"
     
-    •) The "Randomize" button will automatically rearrange lines
+    •) You can go back to the input screen and add more content at any time
     
-    •) You can go back to the input screen and add more content
-    
-    •) Export your rearranged lines via the "Share" button
+    •) Export your rearranged lines via the "Share" button. Press "clear" to start over completely
     """
     
     var placeholderLabel = UILabel()
