@@ -92,7 +92,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
    
     
     var placeholder = """
-    •) Paste any copy text here such as a poem or lyrics
+    •) Paste any copied text here such as a poem or lyrics
     
     •) Any text that is separated by a "return" will be counted as a new line
 
