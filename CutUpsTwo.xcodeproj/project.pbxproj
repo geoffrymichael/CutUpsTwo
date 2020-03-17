@@ -19,7 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		63953A8523CBC07B0033ACFF /* CutUpsTwo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CutUpsTwo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		63953A8523CBC07B0033ACFF /* Cut-ups.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cut-ups.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		63953A8823CBC07B0033ACFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63953A8A23CBC07B0033ACFF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		63953A8C23CBC07B0033ACFF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,7 +54,7 @@
 		63953A8623CBC07B0033ACFF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				63953A8523CBC07B0033ACFF /* CutUpsTwo.app */,
+				63953A8523CBC07B0033ACFF /* Cut-ups.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -101,7 +101,7 @@
 			);
 			name = CutUpsTwo;
 			productName = CutUpsTwo;
-			productReference = 63953A8523CBC07B0033ACFF /* CutUpsTwo.app */;
+			productReference = 63953A8523CBC07B0033ACFF /* Cut-ups.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -297,7 +297,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"CutUpsTwo/Preview Content\"";
 				DEVELOPMENT_TEAM = 6WD8PAVMGJ;
 				ENABLE_PREVIEWS = YES;
@@ -308,7 +308,7 @@
 				);
 				MARKETING_VERSION = 0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = grofulet.CutUpsTwo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Cut-ups";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -319,7 +319,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"CutUpsTwo/Preview Content\"";
 				DEVELOPMENT_TEAM = 6WD8PAVMGJ;
 				ENABLE_PREVIEWS = YES;
@@ -330,7 +330,7 @@
 				);
 				MARKETING_VERSION = 0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = grofulet.CutUpsTwo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Cut-ups";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
