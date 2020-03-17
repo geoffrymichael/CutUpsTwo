@@ -31,11 +31,13 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
         
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Shuffle", style: .plain, target: self, action: #selector(onShuffle))
         
-        let shuffleButton = UIBarButtonItem(title: "Shuffle", style: .plain, target: self, action: #selector(onShuffle))
+        let shuffleButton = UIBarButtonItem(title: "Shuffle", style: .done, target: self, action: #selector(onShuffle))
         
-        let shareButton = UIBarButtonItem(title: "Share", style: .plain, target: self, action: #selector(onShare))
+        let shareButton = UIBarButtonItem(title: "Share", style: .done, target: self, action: #selector(onShare))
         
-        self.navigationItem.setRightBarButtonItems([shareButton,shuffleButton], animated: true)
+        let clearButton = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(onClear))
+        
+        self.navigationItem.setRightBarButtonItems([clearButton,shareButton,shuffleButton], animated: true)
         
         //This is needed to account for safe area
         if UIDevice.current.orientation.isLandscape {
@@ -52,7 +54,7 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
     }
     
     @objc func onShuffle() {
-        print("Shuffled")
+        
         tableView.performBatchUpdates( { scraps.shuffle() } )
          
         tableView.reloadData()
@@ -69,6 +71,25 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
         let activityVC = UIActivityViewController(activityItems: [joinedScraps], applicationActivities: nil)
         
         self.present(activityVC, animated: true, completion: nil)
+    }
+    
+    @objc func onClear() {
+        
+        let alert = UIAlertController(title: "Are you sure you want to delete your Cut-Up?", message: "If you haven't shared it, your data will be lost", preferredStyle: .alert)
+
+        
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+
+        self.present(alert, animated: true)
+        
+        alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { action in
+            self.scraps.removeAll()
+            self.tableView.reloadData()
+        }))
+        
+        
+        
+         
     }
     
     
