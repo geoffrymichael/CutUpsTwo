@@ -88,14 +88,41 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         return label
     }()
     
-
     
+    var placeholderLabel = UILabel()
     
+    func textViewDidChange(_ textView: UITextView) {
+           placeholderLabel.isHidden = !textView.text.isEmpty
+       }
     
     lazy var lyricTextView: UITextView = {
         let view = UITextView()
         view.backgroundColor = UIColor.white
         view.font = UIFont.systemFont(ofSize: 16)
+        
+        let placeholderText =
+                                """
+                                Cut-ups is the literary technique of randomly or intentionally cutting existing texts and rearranging them to form new and interesting blends to inspire new ideas
+
+                                To begin, paste in single or multiple blocks of poetry or lyrics. Click "Automatic" to cut the text into their individual lines and send to the editing board
+
+                                Click on "Edit" to begin rearranging, whether by manually dragging lines around or clicking on the "Shuffle" button
+
+                                For more detailed instructions, click on "Help"
+                                """
+
+        
+        
+        placeholderLabel.text = placeholderText
+        placeholderLabel.font = UIFont.italicSystemFont(ofSize: (view.font?.pointSize)!)
+        placeholderLabel.sizeToFit()
+        
+        placeholderLabel.numberOfLines = 0
+        view.addSubview(placeholderLabel)
+        placeholderLabel.frame.origin = CGPoint(x: 5, y: (view.font?.pointSize)! / 2)
+        placeholderLabel.textColor = UIColor.lightGray
+        placeholderLabel.isHidden = !view.text.isEmpty
+        placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
         
     
         
@@ -143,6 +170,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
         ])
         
+        placeholderLabel.widthAnchor.constraint(equalTo: lyricTextView.widthAnchor).isActive = true
         
 //        previewLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
 //

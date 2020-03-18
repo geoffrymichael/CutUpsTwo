@@ -33,17 +33,17 @@ class HelpViewController: UIViewController, UITextViewDelegate {
     https://www.youtube.com/watch?v=m1InCrzGIPU
 
     Instructions:
-    •) Paste any copied text here such as a poem or lyrics
+    •) Paste in any copied text such as a poem or lyrics
     
     •) Any text that is separated by a "return" will be counted as a new line
 
-    •) You can use the "return" on the keboard to simulate cutting the text anywhere you want. Many source materials may already automatically have lines separated when you paste them in
+    •) You can use the "return" on the keyboard to simulate cutting the text anywhere you want. Many source materials may already automatically have lines separated when you paste them in
     
     •) Copying and pasting from different sources is a good way to get interesting blends
         
-    •) When you are satisified with your formatting, clicking on "Automatic" will cut the text into lines and send them to the editing board
+    •) When you are satisfied with your formatting, clicking on "Automatic" will cut the text into lines and send them to the editing board
     
-    •) You can also use iOS' copy and paste to manually send a single line, words, or word to the editing board. If you use this method, the most recently sent line will show up in the preview window to help you keep track of your place
+    •) You can also use iOS' built-in copy and paste to manually send a single line, words, or word to the editing board. If you use this method, the most recently sent line will show up in the preview window to help you keep track of your place
 
     •) To begin rearranging the lines, click on the "Edit" button
     
@@ -51,7 +51,9 @@ class HelpViewController: UIViewController, UITextViewDelegate {
     
     •) You can go back to the input screen and add more content at any time
     
-    •) Export your rearranged lines via the "Share" button. Press "Clear" to start over completely
+    •) Export your rearranged lines via the "Share" button.
+
+    •) Press "Clear" to start over completely
     """
     
     lazy var helpView: UITextView = {
