@@ -192,7 +192,7 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
                 if let lyric = item.dragItem.localObject as! NSString? {
 //                    tableView.performBatchUpdates( { scraps.remove(at: sourceIndexPath.item); scraps.insert(lyric as String, at: destinationIndexPath.item) ; tableView.deleteRows(at: [sourceIndexPath], with: .automatic); tableView.insertRows(at: [destinationIndexPath], with: .automatic) } )
                     
-                    tableView.performBatchUpdates( { scraps.swapAt(sourceIndexPath.item, destinationIndexPath.item) ; tableView.deleteRows(at: [sourceIndexPath], with: .automatic); tableView.insertRows(at: [destinationIndexPath], with: .automatic) } )
+                    tableView.performBatchUpdates( { scraps.swapAt(sourceIndexPath.item, destinationIndexPath.item) ; tableView.deleteRows(at: [sourceIndexPath], with: .fade); tableView.insertRows(at: [destinationIndexPath], with: .fade) } )
                     
                     print(lyric)
                     tableView.reloadData()
