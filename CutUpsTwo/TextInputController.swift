@@ -25,17 +25,18 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
     
     var scrapsToShare = [String]()
     
-    var scrap: String? {
-        didSet {
-            previewLabel.text = scrap
-            previewLabel.textColor = .black
-        }
-    }
+//    var scrap: String? {
+//        didSet {
+//            previewLabel.text = scrap
+//            previewLabel.textColor = .black
+//        }
+//    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .systemBlue
+        self.view.backgroundColor = .white
+        
         
         self.lyricTextView.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
         
@@ -70,23 +71,23 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
     }
     
     //UILabel needs to be subclassed in order to create edge insets for its text
-    class PreviewLabel: UILabel {
-        override func drawText(in rect: CGRect) {
-            let insets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-            super.drawText(in: rect.inset(by: insets))
-        }
-        
-    }
+//    class PreviewLabel: UILabel {
+//        override func drawText(in rect: CGRect) {
+//            let insets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+//            super.drawText(in: rect.inset(by: insets))
+//        }
+//
+//    }
     
-    lazy var previewLabel: PreviewLabel = {
-        let label = PreviewLabel()
-        label.textColor = .placeholderText
-        label.text = "Most Recently Manually Cut/Copied Line"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .white
-        
-        return label
-    }()
+//    lazy var previewLabel: PreviewLabel = {
+//        let label = PreviewLabel()
+//        label.textColor = .placeholderText
+//        label.text = "Most Recently Manually Cut/Copied Line"
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.backgroundColor = .white
+//
+//        return label
+//    }()
     
     
     var placeholderLabel = UILabel()
@@ -104,7 +105,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
                                 """
                                 Cut-ups is the literary technique of randomly or intentionally cutting existing texts and rearranging them to form new and interesting blends to inspire new ideas
 
-                                To begin, paste in single or multiple blocks of poetry or lyrics. Click "Automatic" to cut the text into their individual lines and send to the editing board
+                                To begin, paste in single or multiple blocks of your poetry, lyrics, notes, musings, journal or diary entries. Click "Automatic" to cut the text into their individual lines and send to the editing board
 
                                 Click on "Edit" to begin rearranging, whether by manually dragging lines around or clicking on the "Shuffle" button
 
@@ -148,24 +149,24 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
     func setupLyricTextView() {
         
 
-        view.addSubview(previewLabel)
-        
-        
+//        view.addSubview(previewLabel)
+//
+//
         let margins = view.layoutMarginsGuide
-        NSLayoutConstraint.activate([
-           previewLabel.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
-           previewLabel.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
-           previewLabel.topAnchor.constraint(equalTo: margins.topAnchor, constant: 8),
-            previewLabel.heightAnchor.constraint(equalToConstant: 50)
-        ])
+//        NSLayoutConstraint.activate([
+//           previewLabel.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+//           previewLabel.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+//           previewLabel.topAnchor.constraint(equalTo: margins.topAnchor, constant: 8),
+//            previewLabel.heightAnchor.constraint(equalToConstant: 50)
+//        ])
         
         view.addSubview(lyricTextView)
         
         NSLayoutConstraint.activate([
             lyricTextView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
             lyricTextView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
-            lyricTextView.widthAnchor.constraint(equalTo: previewLabel.widthAnchor),
-            lyricTextView.topAnchor.constraint(equalTo: previewLabel.bottomAnchor, constant: 8),
+            lyricTextView.widthAnchor.constraint(equalTo: margins.widthAnchor),
+            lyricTextView.topAnchor.constraint(equalTo: margins.topAnchor),
             lyricTextView.bottomAnchor.constraint(equalTo: margins.bottomAnchor)
         
         ])
@@ -240,7 +241,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
     @objc func clipboardChanged(){
         let pasteboardString: String? = UIPasteboard.general.string
         if let theString = pasteboardString {
-            scrap = theString
+//            scrap = theString
 //            scrapsToShare.append(theString)
             
             scrapsToShareData.array.append(theString)
@@ -275,7 +276,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         print(lyricTextView.text!)
         
         
-        scrap = ""
+//        scrap = ""
 
         navigationController?.pushViewController(textVC, animated: true)
         
