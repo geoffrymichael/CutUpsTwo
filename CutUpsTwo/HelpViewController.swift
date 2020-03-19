@@ -27,10 +27,8 @@ class HelpViewController: UIViewController, UITextViewDelegate {
     
     
 
-    •) To get a quick idea of intended use, please check out these links:
-    https://en.wikipedia.org/wiki/Cut-up_technique
     
-    https://www.youtube.com/watch?v=m1InCrzGIPU
+    The Cut-up technique is a creativity process originally popularized by the DADAists. It involves cutting up existing text sources and rearranging them to inspire new ideas. The method was later used by William S. Burroughs, David Bowie, and Radiohead among others
 
     Instructions:
 
