@@ -327,32 +327,3 @@ extension UITextView {
     }
 }
 
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-struct MainPreview: PreviewProvider {
-    
-    static var previews: some View {
-//        Text("preview view")
-        ContainerView().edgesIgnoringSafeArea(.all)
-    }
-    
-    struct ContainerView: UIViewControllerRepresentable {
-        
-        func makeUIViewController(context: UIViewControllerRepresentableContext<MainPreview.ContainerView>) -> UIViewController {
-            return TextInputController()
-        }
-        
-        func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<MainPreview.ContainerView>) {
-            
-        }
-    }
-    
-}
-
-//@available(iOS 13.0, *)
-//struct SwiftLeeViewController_Preview: PreviewProvider {
-//    static var previews: some View {
-//        SwiftLeeViewRepresentable()
-//    }
-//}
-#endif

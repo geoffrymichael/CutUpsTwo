@@ -247,33 +247,4 @@ extension MutableCollection {
 }
 
 
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-struct LyricsPreview: PreviewProvider {
-    
-    static var previews: some View {
-//        Text("preview view")
-        ContainerView().edgesIgnoringSafeArea(.all)
-    }
-    
-    struct ContainerView: UIViewControllerRepresentable {
-        func makeUIViewController(context: UIViewControllerRepresentableContext<LyricsPreview.ContainerView>) -> UIViewController {
-            return LyricsController()
-        }
-        
-        func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<LyricsPreview.ContainerView>) {
-            
-        }
-  
-        
-    }
-    
-}
 
-//@available(iOS 13.0, *)
-//struct SwiftLeeViewController_Preview: PreviewProvider {
-//    static var previews: some View {
-//        SwiftLeeViewRepresentable()
-//    }
-//}
-#endif
