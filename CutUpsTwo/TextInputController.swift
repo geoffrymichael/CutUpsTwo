@@ -103,13 +103,19 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
         let placeholderText =
                                 """
-                                Cut-ups is the literary technique of randomly or intentionally cutting existing texts and rearranging them to form new and interesting blends to inspire new ideas
+                                To begin, COPY one of your random notes, a poem you wrote, your lyrics, an email, a journal or diary entry, a text from your iMessage, whatever text you want from other apps. Literally any text you can copy on your device can be a source (Of course making sure to abide by any relevent privacy and/or third party licensing requirements). The more varied the sources, the better, as this will lead to more creativity inspiring weirdness when they are blended together
 
-                                To begin, paste in single or multiple blocks of your poetry, lyrics, notes, musings, journal or diary entries. Click "Automatic" to cut the text into their individual lines and send to the editing board
+                                PASTE that copied text HERE IN THIS SCREEN. To add more lines, just copy and paste something else. The more sources, and even the more random the sources, the better. Use an old grocery list perhaps. Or you can manually type in lines on the fly.
+                                
+                                When you are satisifed with your material and formatting, click "AUTOMATIC" to cut the texts into individual lines and they will be sent to the editing board
 
-                                Click on "Edit" to begin rearranging, whether by manually dragging lines around or clicking on the "Shuffle" button
+                                Click on "EDIT" to begin rearranging, whether by manually dragging lines around or randomly by clicking on the "SHUFFLE" button. Click it as many times as you want for more randomization
+                                
+                                To export your rearranged, "Cut-up", click the "SHARE" button. Text it to a friend. Paste it into your notes app to keep it. Whatever you want.
 
-                                For more detailed instructions, click on "Help"
+                                Press the "CLEAR" button to start over with a blank workspace
+
+                                For more detailed instructions, click on "HELP"
                                 """
 
         

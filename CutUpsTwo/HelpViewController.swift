@@ -28,15 +28,15 @@ class HelpViewController: UIViewController, UITextViewDelegate {
     
 
     
-    The Cut-up technique is a creativity process originally popularized by the DADAists. It involves cutting up existing text sources and rearranging them to inspire new ideas. The method was later used by William S. Burroughs, David Bowie, and Radiohead among others
-
+    The Cut-up technique is a creativity process originally popularized by the DADAists. It involves cutting up existing text sources and rearranging them to inspire new ideas. The method was later used by William S. Burroughs, David Bowie, and Radiohead among others. See the wikipedia entry for a detailied history. https://en.wikipedia.org/wiki/Cut-up_technique
+    
     Instructions:
 
-    •) Paste in any copied text such as a poem, lyrics, a journal or diary entry-- even news articles(although these may require more care in formatting into separate lines). Paste in any text you want
+    •) Paste in any copied text such as a poem, lyrics, a journal or diary entry-- even *news articles(although these may require more care in formatting into separate lines). Paste in any text you want
     
     •) Any text that is separated by a "return" will be counted as a new line
 
-    •) You can use the "return" on the keyboard to simulate cutting the text anywhere you want. Many source materials may already automatically have lines separated when you paste them in
+    •) You can use the "return" on the iOS keyboard to simulate cutting the text anywhere you want. Many source materials may already automatically have lines separated when you paste them in, but it could be fun to cut up lines even further, perhaps in-half. 
 
     •) Feel free to type in extra lines on the fly or edit existing lines using the keyboard
     
@@ -55,6 +55,8 @@ class HelpViewController: UIViewController, UITextViewDelegate {
     •) Export your rearranged lines via the "Share" button.
 
     •) Press "Clear" to start over completely
+
+    * REMEMBER TO ABIDE BY ANY LICENSING AND ATTRIBUTION REQUIREMENTS IF YOU USE THIRD PARTY SOURCES
     """
     
     lazy var helpView: UITextView = {
