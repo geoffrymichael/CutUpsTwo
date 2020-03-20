@@ -121,7 +121,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
         
         placeholderLabel.text = placeholderText
-        placeholderLabel.font = UIFont.italicSystemFont(ofSize: (view.font?.pointSize)!)
+        placeholderLabel.font = UIFont.italicSystemFont(ofSize: 13)
         placeholderLabel.sizeToFit()
         
         placeholderLabel.numberOfLines = 0
