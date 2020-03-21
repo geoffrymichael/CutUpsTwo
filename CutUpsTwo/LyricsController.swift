@@ -67,8 +67,17 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
         
         let joinedScraps = scraps.joined(separator: "\n")
         
-        
         let activityVC = UIActivityViewController(activityItems: [joinedScraps], applicationActivities: nil)
+        
+        
+        //Ipad share support
+        if let popoverController = activityVC.popoverPresentationController {
+            popoverController.sourceRect = CGRect(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2, width: 0, height: 0)
+            popoverController.sourceView = self.view
+            popoverController.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+        }
+        
+
         
         self.present(activityVC, animated: true, completion: nil)
     }
