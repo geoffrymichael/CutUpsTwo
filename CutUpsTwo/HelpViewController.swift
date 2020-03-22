@@ -14,20 +14,30 @@ class HelpViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+//        view.backgroundColor = .white
+        if traitCollection.userInterfaceStyle == .light {
+            self.view.backgroundColor = UIColor.white
+        } else {
+            self.view.backgroundColor = UIColor.black
+        }
         
                 
         setupHelpView()
         
     }
     
-        
+   
+       
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if traitCollection.userInterfaceStyle == .light {
+            self.view.backgroundColor = UIColor.white
+        } else {
+            self.view.backgroundColor = UIColor.black
+        }
+    }
+    
     var placeholder = """
-    
-    
-    
 
-    
     The Cut-up technique is a creativity process originally popularized by the DADAists. It involves cutting up existing text sources and rearranging them to inspire new ideas. The method was later used by William S. Burroughs, David Bowie, and Radiohead among others. See the wikipedia entry for a detailied history. https://en.wikipedia.org/wiki/Cut-up_technique
     
     Instructions:
@@ -61,7 +71,7 @@ class HelpViewController: UIViewController, UITextViewDelegate {
     
     lazy var helpView: UITextView = {
         let view = UITextView()
-        view.backgroundColor = UIColor.white
+//        view.backgroundColor = UIColor.white
         view.font = UIFont.systemFont(ofSize: 16)
         view.text = placeholder
         

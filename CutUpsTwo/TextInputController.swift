@@ -35,7 +35,13 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+//        self.view.backgroundColor = .white
+        
+        if traitCollection.userInterfaceStyle == .light {
+                   self.view.backgroundColor = UIColor.white
+               } else {
+                   self.view.backgroundColor = UIColor.black
+               }
         
         
         self.lyricTextView.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
@@ -70,6 +76,14 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
 
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if traitCollection.userInterfaceStyle == .light {
+            self.view.backgroundColor = UIColor.white
+        } else {
+            self.view.backgroundColor = UIColor.black
+        }
+    }
+    
     //UILabel needs to be subclassed in order to create edge insets for its text
 //    class PreviewLabel: UILabel {
 //        override func drawText(in rect: CGRect) {
@@ -98,7 +112,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
     
     lazy var lyricTextView: UITextView = {
         let view = UITextView()
-        view.backgroundColor = UIColor.white
+//        view.backgroundColor = UIColor.
         view.font = UIFont.systemFont(ofSize: 16)
         
         let placeholderText =
