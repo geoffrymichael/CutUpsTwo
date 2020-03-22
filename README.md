@@ -1,5 +1,12 @@
 # CutUpsTwo
 
+March 22 Version 1.2.0
+
+Added support for Dark Mode
+
+
+Version 1.0 was accepted and is on the apps store.
+
 Status: March 20, 2020
 
 I am trying to prepare for a 1.0 launch.
