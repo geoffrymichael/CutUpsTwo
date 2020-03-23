@@ -59,9 +59,10 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         NotificationCenter.default.addObserver(self, selector: #selector(clipboardChanged),
         name: UIPasteboard.changedNotification, object: nil)        
         
+        //Keyboard hide and view observers
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
                 
-        
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         let vc = LyricsController()
         vc.scrapsSendDelegate = self
         
@@ -75,6 +76,30 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
 
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    //Adjust scroll view height on keyboard will show
+    @objc func handleKeyboardWillShow(notification: NSNotification) {
+        print("keyboard shows")
+        
+        let keyBoardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        textViewBottomanchor?.constant = -keyBoardHeight.height
+        
+    }
+    
+    //Back to full screen when keyboard hides
+    @objc func handleKeyboardWillHide(notification: NSNotification) {
+        let margins = view.layoutMargins
+        
+        textViewBottomanchor?.constant = margins.bottom
+        lyricTextView.layoutIfNeeded()
+        
+    }
+    
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if traitCollection.userInterfaceStyle == .light {
@@ -165,6 +190,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         })
     }
     
+    var textViewBottomanchor: NSLayoutConstraint?
     
     func setupLyricTextView() {
         
@@ -187,9 +213,12 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
             lyricTextView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
             lyricTextView.widthAnchor.constraint(equalTo: margins.widthAnchor),
             lyricTextView.topAnchor.constraint(equalTo: margins.topAnchor),
-            lyricTextView.bottomAnchor.constraint(equalTo: margins.bottomAnchor)
+//            lyricTextView.bottomAnchor.constraint(equalTo: margins.bottomAnchor)
         
         ])
+        
+        textViewBottomanchor = lyricTextView.bottomAnchor.constraint(equalTo: margins.bottomAnchor)
+        textViewBottomanchor?.isActive = true
         
         placeholderLabel.widthAnchor.constraint(equalTo: lyricTextView.widthAnchor).isActive = true
         
