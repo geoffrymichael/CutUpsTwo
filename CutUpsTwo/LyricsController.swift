@@ -31,18 +31,23 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
         
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Shuffle", style: .plain, target: self, action: #selector(onShuffle))
         
-        let shuffleButton = UIBarButtonItem(title: "Shuffle", style: .done, target: self, action: #selector(onShuffle))
+//        let shuffleButton = UIBarButtonItem(title: "Shuffle", style: .done, target: self, action: #selector(onShuffle))
         
-        let shareButton = UIBarButtonItem(title: "Share", style: .done, target: self, action: #selector(onShare))
+        let shuffleButton = UIBarButtonItem(image: UIImage(systemName: "shuffle"), style: .plain, target: self, action: #selector(onShuffle))
         
-        let clearButton = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(onClear))
+//        let shareButton = UIBarButtonItem(title: "Share", style: .done, target: self, action: #selector(onShare))
         
+        let shareButton = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(onShare))
+        
+//        let clearButton = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(onClear))
+        
+        let clearButton = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain, target: self, action: #selector(onClear))
         self.navigationItem.setRightBarButtonItems([clearButton,shareButton,shuffleButton], animated: true)
         
-        //This is needed to account for safe area
-        if UIDevice.current.orientation.isLandscape {
-            tableView.contentInset = UIEdgeInsets(top: 0, left: UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.left ?? 0.0, bottom: 0, right: 0.0)
-        }
+        //This is needed to account for safe area. For now, the app is portrait mode only so this is commented out
+//        if UIDevice.current.orientation.isLandscape {
+//            tableView.contentInset = UIEdgeInsets(top: 0, left: UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.left ?? 0.0, bottom: 0, right: 0.0)
+//        }
         
         
         tableView.dragDelegate = self
@@ -101,18 +106,18 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
          
     }
     
-    
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animate(alongsideTransition: { context in
-            
-            if UIDevice.current.orientation.isLandscape {
-                self.tableView.contentInset = UIEdgeInsets(top: 0, left: UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.left ?? 0.0, bottom: 0, right: 0.0)
-                self.tableView.reloadData()
-                
-            }
-            
-        })
-    }
+    //To account for safe area in landscape mode. for now the app is portrait mode only so this is commented out
+//    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+//        coordinator.animate(alongsideTransition: { context in
+//            
+//            if UIDevice.current.orientation.isLandscape {
+//                self.tableView.contentInset = UIEdgeInsets(top: 0, left: UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.left ?? 0.0, bottom: 0, right: 0.0)
+//                self.tableView.reloadData()
+//                
+//            }
+//            
+//        })
+//    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections

@@ -37,6 +37,10 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         super.viewDidLoad()
 //        self.view.backgroundColor = .white
         
+        //Remove the "back" text from the back button
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+        //Account for viewcontroller color depending on load interface style
         if traitCollection.userInterfaceStyle == .light {
                    self.view.backgroundColor = UIColor.white
                } else {
@@ -44,14 +48,17 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
                }
         
         
+    
         self.lyricTextView.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
         
         let edit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: Selector(("handleSend")))
         self.navigationItem.leftBarButtonItem = edit
         
 
-        let automaticButton = UIBarButtonItem(title: "Automatic", style: .plain, target: self, action: #selector(automaticCut))
+//        let automaticButton = UIBarButtonItem(title: "Automatic", style: .plain, target: self, action: #selector(automaticCut))
         let helpButton = UIBarButtonItem(title: "Help", style: .plain, target: self, action: #selector(onHelp))
+        
+        let automaticButton = UIBarButtonItem(image: UIImage(systemName: "scissors"), style: .plain, target: self, action: #selector(automaticCut))
         
         self.navigationItem.setRightBarButtonItems([helpButton, automaticButton], animated: true)
         
@@ -66,10 +73,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         let vc = LyricsController()
         vc.scrapsSendDelegate = self
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(systemCut(notification:)), name: UIMenuController.didHideMenuNotification, object: nil)
-        
-      
-        
+
         setupLyricTextView()
         
        
@@ -100,7 +104,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
     }
     
-    
+    //Change view controller color depending on interface style
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if traitCollection.userInterfaceStyle == .light {
             self.view.backgroundColor = UIColor.white
@@ -129,6 +133,9 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
 //    }()
     
     
+    
+    
+    
     var placeholderLabel = UILabel()
     
     func textViewDidChange(_ textView: UITextView) {
@@ -140,24 +147,25 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
 //        view.backgroundColor = UIColor.
         view.font = UIFont.systemFont(ofSize: 16)
         
+
+        
         let placeholderText =
                                 """
                                 To begin, COPY one of your random notes, a poem you wrote, your lyrics, an email, a journal or diary entry, a text from your iMessage, whatever text you want from other apps. Literally any text you can copy on your device can be a source (Of course making sure to abide by any relevent privacy and/or third party licensing requirements). The more varied the sources, the better, as this will lead to more creativity inspiring weirdness when they are blended together
 
-                                PASTE that copied text HERE IN THIS SCREEN. To add more lines, just copy and paste something else. The more sources, and even the more random the sources, the better. Use an old grocery list perhaps. Or you can manually type in lines on the fly.
+                                PASTE that copied text HERE IN THIS SCREEN. To add more lines, just copy and paste something else. The more sources, and even the more random the sources, the better. Use an old grocery list perhaps. Or you can manually type in lines on the fly
                                 
-                                When you are satisifed with your material and formatting, click "AUTOMATIC" to cut the texts into individual lines and they will be sent to the editing board
+                                When you are satisifed with your material and formatting, click the ✄ to cut the texts into individual lines and they will be sent to the editing board
 
-                                Click on "EDIT" to begin rearranging, whether by manually dragging lines around or randomly by clicking on the "SHUFFLE" button. Click it as many times as you want for more randomization
+                                Click on "EDIT" to begin rearranging, whether by manually dragging lines around or randomly by clicking on the 🔀 button. Click it as many times as you want for more randomization
                                 
-                                To export your rearranged, "Cut-up", click the "SHARE" button. Text it to a friend. Paste it into your notes app to keep it. Whatever you want.
+                                To export your rearranged, "Cut-up", click the ⏍ button. Text it to a friend. Paste it into your notes app to keep it. Whatever you want.
 
                                 Press the "CLEAR" button to start over with a blank workspace
 
                                 For more detailed instructions, click on "HELP"
                                 """
 
-        
         
         placeholderLabel.text = placeholderText
         placeholderLabel.font = UIFont.italicSystemFont(ofSize: 13)
