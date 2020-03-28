@@ -33,7 +33,7 @@ class ScrapTableViewCell: UITableViewCell {
         
         addSubview(lineTextLabel)
         
-        lineTextLabel.font = lineTextLabel.font.withSize(30)
+        lineTextLabel.font = lineTextLabel.font.withSize(20)
         
         lineTextLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         lineTextLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
