@@ -34,7 +34,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
 //        }
 //    }
     
-    let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+    let activityIN = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,9 +42,11 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
         
         
-        activityIndicator.center = view.center
+//        activityIndicator.center = view.center
+//
+//        view.addSubview(activityIndicator)
         
-        view.addSubview(activityIndicator)
+        
         
         
         //Remove the "back" text from the back button
@@ -95,6 +97,24 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
     
     }
     
+    
+    //MARK: Vision Implimentation
+    
+    //MARK: Vision License
+    /*
+        The Vision implimentation for Cut-ups uses code modified from apple provided source code. Please see license information below
+        
+       Copyright © 2019 Apple Inc.
+
+       Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+       The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+       THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+     */
+    
+    //The camera button sends to the documentscanner controller
     @objc func onCamera() {
          let documentCameraViewController = VNDocumentCameraViewController()
                documentCameraViewController.delegate = self
@@ -190,16 +210,28 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
            placeholderLabel.isHidden = !textView.text.isEmpty
        }
     
+   
+    
     lazy var lyricTextView: UITextView = {
         let view = UITextView()
 //        view.backgroundColor = UIColor.
         view.font = UIFont.systemFont(ofSize: 16)
         
+//         var activityIN: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 100, y: 200, width: 50, height: 50)) as UIActivityIndicatorView
+        
+        activityIN.center = CGPoint(x: 180, y: 180)
+        activityIN.hidesWhenStopped = true
+        
+        activityIN.style = UIActivityIndicatorView.Style.large
+        activityIN.stopAnimating()
+        view.addSubview(activityIN)
 
         
         let placeholderText =
                                 """
                                 To begin, COPY one of your random notes, a poem you wrote, your lyrics, an email, a journal or diary entry, a text from your iMessage, whatever text you want from other apps. Literally any text you can copy on your device can be a source (Of course making sure to abide by any relevent privacy and/or third party licensing requirements). The more varied the sources, the better, as this will lead to more creativity inspiring weirdness when they are blended together
+
+                                New in version 2, you can attempt to scan in printed physical texts. Click on the 📷 to begin this process. For more detailed information about the interface, please click on "HELP"
 
                                 PASTE that copied text HERE IN THIS SCREEN. To add more lines, just copy and paste something else. The more sources, and even the more random the sources, the better. Use an old grocery list perhaps. Or you can manually type in lines on the fly
                                 
@@ -209,7 +241,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
                                 
                                 To export your rearranged, "Cut-up", click the ⏍ button. Text it to a friend. Paste it into your notes app to keep it. Whatever you want.
 
-                                Press the "CLEAR" button to start over with a blank workspace
+                                Press the 🗑 button to start over with a blank workspace
 
                                 For more detailed instructions, click on "HELP"
                                 """
@@ -372,7 +404,8 @@ extension TextInputController: VNDocumentCameraViewControllerDelegate {
         // dismiss the document camera
         controller.dismiss(animated: true)
         
-        activityIndicator.isHidden = false
+        activityIN.isHidden = false
+        activityIN.startAnimating()
         
         textRecognitionWorkQueue.async {
             self.resultingText = ""
@@ -392,7 +425,7 @@ extension TextInputController: VNDocumentCameraViewControllerDelegate {
             DispatchQueue.main.async(execute: {
                 self.lyricTextView.text = self.resultingText
                 self.placeholderLabel.text = ""
-                self.activityIndicator.isHidden = true
+                self.activityIN.isHidden = true
             })
         }
 
