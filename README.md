@@ -1,6 +1,11 @@
 # CutUpsTwo
 
-March 22 Version 1.2.0
+March 28 2020
+
+Version 2.0 Deployed to the App Store. This version includes Core ML/Core Vision functionality to be able to scan physical text sources and convert them into digital text as an additional source. 
+
+
+March 22, 2020 Version 1.2.0
 
 Added support for Dark Mode
 
