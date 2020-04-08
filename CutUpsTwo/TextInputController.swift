@@ -371,9 +371,17 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
                     let str = String(decoding: data!, as: UTF8.self)
                     let myString = str.components(separatedBy: .newlines)
                     
-                    let randomOne = Int.random(in: 400...myString.count - 3)
-                    let randomTwo = randomOne + 1
-                    let randomThree = randomTwo + 2
+                    var randomOne: Int?
+                    var randomTwo: Int?
+                    var randomThree: Int?
+                    
+                    if myString.count > 400 {
+                        randomOne = Int.random(in: 350...myString.count - 3)
+                        randomTwo = (randomOne ?? 0) + 1
+                        randomThree = (randomTwo ?? 0) + 2
+                    }
+                    
+                    
 
                     print(myString[0])
 
@@ -381,7 +389,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
                     DispatchQueue.main.async {
                         self.placeholderLabel.text = ""
                        
-                        self.lyricTextView.text = "\(myString[randomOne]), \(myString[randomTwo]), \(myString[randomThree])"
+                        self.lyricTextView.text = "\(myString[randomOne ?? 0]), \(myString[randomTwo ?? 0]), \(myString[randomThree ?? 0])"
                     }
                     
                     
