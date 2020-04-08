@@ -68,6 +68,8 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
 
 //        let automaticButton = UIBarButtonItem(title: "Automatic", style: .plain, target: self, action: #selector(automaticCut))
+        let randomButton = UIBarButtonItem(title: "Random", style: .plain, target: self, action: #selector(onRandom))
+        
         let helpButton = UIBarButtonItem(title: "Help", style: .plain, target: self, action: #selector(onHelp))
         
         let automaticButton = UIBarButtonItem(image: UIImage(systemName: "scissors"), style: .plain, target: self, action: #selector(automaticCut))
@@ -77,7 +79,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
         
         
-        self.navigationItem.setRightBarButtonItems([helpButton, cameraButton, automaticButton], animated: true)
+        self.navigationItem.setRightBarButtonItems([randomButton, helpButton, cameraButton, automaticButton], animated: true)
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(clipboardChanged),
@@ -330,6 +332,33 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
             print(scrapsToShare)
             
         }
+    }
+    
+    @objc func onRandom() {
+        print("Random was pressed")
+        
+        let url = "http://www.gutenberg.org/cache/epub/935/pg935.txt"
+        let session = URLSession.shared
+        
+        session.dataTask(with: URL(string: url)!) { (data, response, error) in
+            if error != nil {
+                print(error as Any)
+            } else {
+                let str = String(decoding: data!, as: UTF8.self)
+                let myString = str.components(separatedBy: .newlines)
+                
+
+                print(myString[0])
+
+                print(myString[400], myString[401], myString[402])
+                DispatchQueue.main.async {
+                    self.placeholderLabel.text = ""
+                    self.lyricTextView.text = "\(myString[400]), \(myString[401]), \(myString[402])"
+                }
+                
+                
+            }
+        }.resume()
     }
     
     @objc func handleSend() {
