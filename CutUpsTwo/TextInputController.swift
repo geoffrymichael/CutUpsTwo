@@ -351,13 +351,17 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
                 let str = String(decoding: data!, as: UTF8.self)
                 let myString = str.components(separatedBy: .newlines)
                 
+                let randomOne = Int.random(in: 400...myString.count - 3)
+                let randomTwo = randomOne + 1
+                let randomThree = randomTwo + 2
 
                 print(myString[0])
 
-                print(myString[400], myString[401], myString[402])
+//                print(myString[7000], myString[7001], myString[7002])
                 DispatchQueue.main.async {
                     self.placeholderLabel.text = ""
-                    self.lyricTextView.text = "\(myString[400]), \(myString[401]), \(myString[402])"
+                   
+                    self.lyricTextView.text = "\(myString[randomOne]), \(myString[randomTwo]), \(myString[randomThree])"
                 }
                 
                 
