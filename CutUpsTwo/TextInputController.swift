@@ -68,6 +68,9 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
 
 //        let automaticButton = UIBarButtonItem(title: "Automatic", style: .plain, target: self, action: #selector(automaticCut))
+        
+        let randomButton = UIBarButtonItem(title: "Random", style: .plain, target: self, action: #selector(onRandom))
+        
         let helpButton = UIBarButtonItem(title: "Help", style: .plain, target: self, action: #selector(onHelp))
         
         let automaticButton = UIBarButtonItem(image: UIImage(systemName: "scissors"), style: .plain, target: self, action: #selector(automaticCut))
@@ -77,7 +80,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
         
         
-        self.navigationItem.setRightBarButtonItems([helpButton, cameraButton, automaticButton], animated: true)
+        self.navigationItem.setRightBarButtonItems([helpButton, randomButton, cameraButton, automaticButton], animated: true)
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(clipboardChanged),
@@ -350,6 +353,42 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
         
     }
+    
+    @objc func onRandom() {
+            print("Random was pressed")
+            
+           
+            
+            let rando = Int.random(in: 0...1600)
+            
+            let url = "http://www.gutenberg.org/cache/epub/\(rando)/pg\(rando).txt"
+            let session = URLSession.shared
+            
+            session.dataTask(with: URL(string: url)!) { (data, response, error) in
+                if error != nil {
+                    print(error as Any)
+                } else {
+                    let str = String(decoding: data!, as: UTF8.self)
+                    let myString = str.components(separatedBy: .newlines)
+                    
+                    let randomOne = Int.random(in: 400...myString.count - 3)
+                    let randomTwo = randomOne + 1
+                    let randomThree = randomTwo + 2
+
+                    print(myString[0])
+
+    //                print(myString[7000], myString[7001], myString[7002])
+                    DispatchQueue.main.async {
+                        self.placeholderLabel.text = ""
+                       
+                        self.lyricTextView.text = "\(myString[randomOne]), \(myString[randomTwo]), \(myString[randomThree])"
+                    }
+                    
+                    
+                }
+            }.resume()
+    }
+    
     
     //A function to parse text by carriage returns (by line)
     @objc func automaticCut() {
