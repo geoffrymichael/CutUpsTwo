@@ -337,7 +337,11 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
     @objc func onRandom() {
         print("Random was pressed")
         
-        let url = "http://www.gutenberg.org/cache/epub/935/pg935.txt"
+       
+        
+        let rando = Int.random(in: 0...1600)
+        
+        let url = "http://www.gutenberg.org/cache/epub/\(rando)/pg\(rando).txt"
         let session = URLSession.shared
         
         session.dataTask(with: URL(string: url)!) { (data, response, error) in
