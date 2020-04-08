@@ -53,6 +53,8 @@ class HelpViewController: UIViewController, UITextViewDelegate {
     •) Copying and pasting from different sources is a good way to get interesting blends
 
     •) You can click on the 📷 icon to attempt to scan in physical sources of printed texts. Artists using the Cut-up technique used to cut out newspaper articles or other random text and cut them into their other sources. You can use this feature to mimic this process. Try to run the scan feature in a clean, well-lighted place. You can have the software try to automatically scan a document when it recognizses the text. This process will be indicated by a light blue overlay while trying to process and should result in more reliable results. However, it is more difficult to get a scan this way-- you must keep the camera still, the text must be clear, and you should be in a well-lighted environment. Alternatively, you can also manually press the shutter over an amount of text, and then outline the text you want to scan in the overlay that appears by dragging the corners of the selection box around your text. The results of these scans may be less accurate. When you are satisified with your scan, or scans, press the "SAVE" button to place the text in the text input screen. Please note, the analyzing process can take a few seconds. Make sure to look over and manually edit the resultant text for any inaccuracies. Once you are satisfied, send the text the editing board.
+
+    •) The random button will pull in a compeltely randomized snippet of text from a book from gutenberg.org. It will most likely need to be cleaned up. 
         
     •) When you are satisfied with your formatting, clicking the ✄ button will cut the text into lines and send them to the editing board
 

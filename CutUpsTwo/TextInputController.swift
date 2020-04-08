@@ -232,21 +232,20 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
         let placeholderText =
                                 """
-                                To begin, COPY one of your random notes, a poem you wrote, your lyrics, an email, a journal or diary entry, a text from your iMessage, whatever text you want from other apps. Literally any text you can copy on your device can be a source (Of course making sure to abide by any relevent privacy and/or third party licensing requirements). The more varied the sources, the better, as this will lead to more creativity inspiring weirdness when they are blended together
+                                Type or copy/paste in some text.
 
-                                New in version 2, you can attempt to scan in printed physical texts. Click on the 📷 to begin this process. For more detailed information about the interface, please click on "HELP"
+                                Click on the scissors to cut the text into chuncks.
 
-                                PASTE that copied text HERE IN THIS SCREEN. To add more lines, just copy and paste something else. The more sources, and even the more random the sources, the better. Use an old grocery list perhaps. Or you can manually type in lines on the fly
+                                Click on edit to rearrange the chunks into new and intersting ideas.
+
+                                Click on the camera to scan in some physical text if you like.
+
+                                Click on random to get a random snippet of a passage from an old book.
+
+                                Blend it all together and cut-it-up to make something new. How fun.
+
                                 
-                                When you are satisifed with your material and formatting, click the ✄ to cut the texts into individual lines and they will be sent to the editing board
 
-                                Click on "EDIT" to begin rearranging, whether by manually dragging lines around or randomly by clicking on the 🔀 button. Click it as many times as you want for more randomization
-                                
-                                To export your rearranged, "Cut-up", click the ⏍ button. Text it to a friend. Paste it into your notes app to keep it. Whatever you want.
-
-                                Press the 🗑 button to start over with a blank workspace
-
-                                For more detailed instructions, click on "HELP"
                                 """
 
         
