@@ -240,9 +240,11 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
 
                                 Click on the camera to scan in some physical text if you like.
 
-                                Click on random to get a random snippet of a passage from an old book.
+                                Click on random to get a random snippet of a passage from an old book. (This feature requires that you be connected to the internet)
 
                                 Blend it all together and cut-it-up to make something new. How fun.
+                                
+                                Click on Help for more detailed instructions.
 
                                 
 
@@ -366,7 +368,9 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         activityIN.startAnimating()
             session.dataTask(with: URL(string: url)!) { (data, response, error) in
                 if error != nil {
-                    print(error as Any)
+                    DispatchQueue.main.async {
+                        self.lyricTextView.text = "Cut-ups error. Something went wrong, please make sure you are conected to the internet to use the random feature."
+                    }
                 } else {
                     let str = String(decoding: data!, as: UTF8.self)
                     let myString = str.components(separatedBy: .newlines)
