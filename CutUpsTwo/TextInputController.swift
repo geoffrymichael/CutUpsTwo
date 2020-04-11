@@ -363,6 +363,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
             let url = "http://www.gutenberg.org/cache/epub/\(rando)/pg\(rando).txt"
             let session = URLSession.shared
             
+        activityIN.startAnimating()
             session.dataTask(with: URL(string: url)!) { (data, response, error) in
                 if error != nil {
                     print(error as Any)
@@ -386,6 +387,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
 
     //                print(myString[7000], myString[7001], myString[7002])
                     DispatchQueue.main.async {
+                        self.activityIN.stopAnimating()
                         self.placeholderLabel.text = ""
                        
                         self.lyricTextView.text = "\(myString[randomOne ?? 0]), \(myString[randomTwo ?? 0]), \(myString[randomThree ?? 0])"
