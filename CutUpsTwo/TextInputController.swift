@@ -370,6 +370,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
                 if error != nil {
                     DispatchQueue.main.async {
                         self.lyricTextView.text = "Cut-ups error. Something went wrong, please make sure you are conected to the internet to use the random feature."
+                        self.activityIN.stopAnimating()
                     }
                 } else {
                     let str = String(decoding: data!, as: UTF8.self)
