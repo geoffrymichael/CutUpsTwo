@@ -10,6 +10,60 @@ import UIKit
 import Vision
 import VisionKit
 
+struct Test: Codable {
+    
+    
+    var myString: String?
+    
+    init(myString: String?) {
+        self.myString = myString
+    }
+    
+    
+    var json: Data? {
+        return try? JSONEncoder().encode(self)
+    }
+    
+       
+    init?(json: Data) {
+        if let newValue = try? JSONDecoder().decode(Test.self, from: json) {
+            self = newValue
+        }
+        else {
+            return nil
+        }
+    }
+}
+
+class Document: UIDocument {
+    var test: Test?
+    
+    override func contents(forType typeName: String) throws -> Any {
+        // Encode your document with an instance of NSData or NSFileWrapper
+       
+        if let myData = try? JSONEncoder().encode(test.self) {
+            return myData
+        } else {
+            return Data()
+        }
+        
+    }
+    
+    
+    override func load(fromContents contents: Any, ofType typeName: String?) throws {
+        // Check if the contents passed to us are actually of type Data
+        if let json = contents as? Data {
+            test = Test(json: json)
+        }
+        else {
+            print("Error trying to load EmojiArtDocument. Content is not JSON data")
+        }
+    }
+    
+}
+
+
+
 class ScrapsToShareData {
     var array: [String] = []
 }
