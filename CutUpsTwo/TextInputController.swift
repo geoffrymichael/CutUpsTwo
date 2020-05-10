@@ -36,6 +36,22 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
     
     let activityIN = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
     
+    var document: Document?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Access the document
+        document?.open(completionHandler: { (success) in
+            if success {
+                // Display the content of the document, e.g.:
+                self.lyricTextView.text = self.document?.text ?? ""
+            } else {
+                // Make sure to handle the failed import appropriately, e.g., by presenting an error message to the user.
+            }
+        })
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.view.backgroundColor = .white
@@ -78,9 +94,10 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
         let cameraButton = UIBarButtonItem(image: UIImage(systemName: "camera"), style: .plain, target: self, action: #selector(onCamera))
         
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(handleDone))
         
         
-        self.navigationItem.setRightBarButtonItems([helpButton, randomButton, cameraButton, automaticButton], animated: true)
+        self.navigationItem.setRightBarButtonItems([helpButton, doneButton, randomButton, cameraButton, automaticButton], animated: true)
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(clipboardChanged),
@@ -333,6 +350,15 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
             
             print(scrapsToShare)
             
+        }
+    }
+    
+    @objc func handleDone() {
+        document?.text = lyricTextView.text
+        document?.updateChangeCount(.done)
+        
+        dismiss(animated: true) {
+            self.document?.close(completionHandler: nil)
         }
     }
     

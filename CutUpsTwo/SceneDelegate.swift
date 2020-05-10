@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UINavigationController(rootViewController: TextInputController())
+            window.rootViewController = UINavigationController(rootViewController: DocumentBrowserViewController())
             self.window = window
             window.makeKeyAndVisible()
         }
