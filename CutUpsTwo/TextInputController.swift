@@ -10,8 +10,31 @@ import UIKit
 import Vision
 import VisionKit
 
-class ScrapsToShareData {
+class ScrapsToShareData: Codable {
     var array: [String] = []
+    
+    
+}
+
+class ScrapsDocument: UIDocument {
+    var lyricsData: ScrapsToShareData?
+    
+    override func contents(forType typeName: String) throws -> Any {
+        let encoder = JSONEncoder()
+        let myJson = try? encoder.encode(lyricsData)
+        
+        return myJson ?? Data("whatever".utf8)
+        
+    }
+    
+    override func load(fromContents contents: Any, ofType typeName: String?) throws {
+        guard let contents = contents as? Data else {
+            return
+        }
+        
+        lyricsData = try JSONDecoder().decode(ScrapsToShareData.self, from: contents)
+        
+    }
 }
 
 class Document: UIDocument {
@@ -128,13 +151,24 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
             return
         }
         
-        let document = Document(fileURL: url)
         
-        document.open { (success) in
-            print("File succesfully loaded")
+        
+        let scrapsDocument = ScrapsDocument(fileURL: url)
+        
+        scrapsDocument.open { (success) in
+            print("Document loaded succesfully")
+            print(scrapsDocument.lyricsData?.array)
+            
         }
         
-        print(document.text)
+        
+//        let document = Document(fileURL: url)
+//
+//        document.open { (success) in
+//            print("File succesfully loaded")
+//        }
+//
+//        print(document.text)
     }
     
     @objc func onSave() {
@@ -144,15 +178,30 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
             return
         }
         
-        let document = Document(fileURL: url)
+        let scrapsDocument = ScrapsDocument(fileURL: url)
         
-        print(url)
-      
-        document.save(to: url, for: .forCreating, completionHandler: { (success) in
+        let saveArray = ScrapsToShareData()
+        
+        saveArray.array = ["bike", "car", "train"]
+        
+        scrapsDocument.lyricsData = saveArray
+        
+        scrapsDocument.save(to: url, for: .forCreating) { (success) in
             if success {
-                print("file succesfully saved")
+                print("file was saved successfully")
+                
             }
-        })
+        }
+        
+//        let document = Document(fileURL: url)
+//
+//        print(url)
+//
+//        document.save(to: url, for: .forCreating, completionHandler: { (success) in
+//            if success {
+//                print("file succesfully saved")
+//            }
+//        })
         
     }
     
