@@ -14,6 +14,24 @@ class ScrapsToShareData {
     var array: [String] = []
 }
 
+class Document: UIDocument {
+    var text = "Test UIDocument text"
+    
+    override func contents(forType typeName: String) throws -> Any {
+        return Data(text.utf8)
+    }
+    
+    override func load(fromContents contents: Any, ofType typeName: String?) throws {
+        guard let contents = contents as? Data else {
+            return
+        }
+        
+        text = String(decoding: contents, as: UTF8.self)
+    }
+    
+}
+
+
 class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArrayDelegate {
     
     
@@ -78,9 +96,13 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
         let cameraButton = UIBarButtonItem(image: UIImage(systemName: "camera"), style: .plain, target: self, action: #selector(onCamera))
         
+        let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(onSave))
+        
+        let loadButton = UIBarButtonItem(title: "Load", style: .plain, target: self, action: #selector(onLoad))
         
         
-        self.navigationItem.setRightBarButtonItems([helpButton, randomButton, cameraButton, automaticButton], animated: true)
+        
+        self.navigationItem.setRightBarButtonItems([helpButton, randomButton, cameraButton, automaticButton, saveButton, loadButton], animated: true)
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(clipboardChanged),
@@ -98,6 +120,40 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         setupVision()
         
     
+    }
+    
+    @objc func onLoad() {
+        print("Load was clicked")
+        guard let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
+            return
+        }
+        
+        let document = Document(fileURL: url)
+        
+        document.open { (success) in
+            print("File succesfully loaded")
+        }
+        
+        print(document.text)
+    }
+    
+    @objc func onSave() {
+        print("Save was clicked")
+        
+        guard let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
+            return
+        }
+        
+        let document = Document(fileURL: url)
+        
+        print(url)
+      
+        document.save(to: url, for: .forCreating, completionHandler: { (success) in
+            if success {
+                print("file succesfully saved")
+            }
+        })
+        
     }
     
     
