@@ -28,6 +28,24 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        guard let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
+            return
+        }
+        
+        
+        
+        let scrapsDocument = ScrapsDocument(fileURL: url)
+        
+        scrapsDocument.open { (success) in
+            print("Document loaded succesfully on lyrics view")
+            print(scrapsDocument.lyricsData?.array)
+            
+            self.scraps = scrapsDocument.lyricsData?.array ?? ["So messy"]
+            
+        }
+        
+        
+        
         
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Shuffle", style: .plain, target: self, action: #selector(onShuffle))
         
@@ -42,7 +60,11 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
 //        let clearButton = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(onClear))
         
         let clearButton = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain, target: self, action: #selector(onClear))
-        self.navigationItem.setRightBarButtonItems([clearButton,shareButton,shuffleButton], animated: true)
+        
+        let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(onSave))
+        
+        let loadButton = UIBarButtonItem(title: "Load", style: .plain, target: self, action: #selector(onLoad))
+        self.navigationItem.setRightBarButtonItems([clearButton,shareButton,shuffleButton, saveButton, loadButton], animated: true)
         
         //This is needed to account for safe area. For now, the app is portrait mode only so this is commented out
 //        if UIDevice.current.orientation.isLandscape {
@@ -57,6 +79,67 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
         
         tableView.register(ScrapTableViewCell.self, forCellReuseIdentifier: scrapCell)
     }
+    
+    
+    @objc func onLoad() {
+            print("Load was clicked")
+            guard let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
+                return
+            }
+            
+            
+            
+            let scrapsDocument = ScrapsDocument(fileURL: url)
+            
+            scrapsDocument.open { (success) in
+                print("Document loaded succesfully")
+                print(scrapsDocument.lyricsData?.array)
+                
+            }
+            
+            
+    //        let document = Document(fileURL: url)
+    //
+    //        document.open { (success) in
+    //            print("File succesfully loaded")
+    //        }
+    //
+    //        print(document.text)
+        }
+        
+        @objc func onSave() {
+            print("Save was clicked")
+            
+            guard let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
+                return
+            }
+            
+            let scrapsDocument = ScrapsDocument(fileURL: url)
+            
+            let saveArray = scrapsToShareData
+            
+            //If some lyrics have been cut, the array can be saved to document
+            saveArray.array = scrapsToShareData.array
+            scrapsDocument.lyricsData = saveArray
+            
+            scrapsDocument.save(to: url, for: .forCreating) { (success) in
+                if success {
+                    print("file was saved successfully")
+                    
+                }
+            }
+            
+    //        let document = Document(fileURL: url)
+    //
+    //        print(url)
+    //
+    //        document.save(to: url, for: .forCreating, completionHandler: { (success) in
+    //            if success {
+    //                print("file succesfully saved")
+    //            }
+    //        })
+            
+        }
     
     @objc func onShuffle() {
         

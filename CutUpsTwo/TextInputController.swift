@@ -79,6 +79,21 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        guard let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
+            return
+        }
+        
+        
+        
+        let scrapsDocument = ScrapsDocument(fileURL: url)
+        
+        scrapsDocument.open { (success) in
+            print("Document loaded succesfully")
+            print(scrapsDocument.lyricsData?.array)
+            
+        }
+        
 //        self.view.backgroundColor = .white
         
         
@@ -119,13 +134,10 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
         let cameraButton = UIBarButtonItem(image: UIImage(systemName: "camera"), style: .plain, target: self, action: #selector(onCamera))
         
-        let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(onSave))
-        
-        let loadButton = UIBarButtonItem(title: "Load", style: .plain, target: self, action: #selector(onLoad))
+       
         
         
-        
-        self.navigationItem.setRightBarButtonItems([helpButton, randomButton, cameraButton, automaticButton, saveButton, loadButton], animated: true)
+        self.navigationItem.setRightBarButtonItems([helpButton, randomButton, cameraButton, automaticButton], animated: true)
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(clipboardChanged),
@@ -145,67 +157,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
     
     }
     
-    @objc func onLoad() {
-        print("Load was clicked")
-        guard let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
-            return
-        }
-        
-        
-        
-        let scrapsDocument = ScrapsDocument(fileURL: url)
-        
-        scrapsDocument.open { (success) in
-            print("Document loaded succesfully")
-            print(scrapsDocument.lyricsData?.array)
-            
-        }
-        
-        
-//        let document = Document(fileURL: url)
-//
-//        document.open { (success) in
-//            print("File succesfully loaded")
-//        }
-//
-//        print(document.text)
-    }
-    
-    @objc func onSave() {
-        print("Save was clicked")
-        
-        guard let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
-            return
-        }
-        
-        let scrapsDocument = ScrapsDocument(fileURL: url)
-        
-        let saveArray = ScrapsToShareData()
-        
-        saveArray.array = ["bike", "car", "train"]
-        
-        scrapsDocument.lyricsData = saveArray
-        
-        scrapsDocument.save(to: url, for: .forCreating) { (success) in
-            if success {
-                print("file was saved successfully")
-                
-            }
-        }
-        
-//        let document = Document(fileURL: url)
-//
-//        print(url)
-//
-//        document.save(to: url, for: .forCreating, completionHandler: { (success) in
-//            if success {
-//                print("file succesfully saved")
-//            }
-//        })
-        
-    }
-    
-    
+
     //MARK: Vision Implimentation
     
     //MARK: Vision License
@@ -515,6 +467,26 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
             
             self.scrapsToShareData.array.append(line)
 
+        }
+        
+        guard let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
+            return
+        }
+        
+        let scrapsDocument = ScrapsDocument(fileURL: url)
+        
+        let saveArray = scrapsToShareData
+        
+        //If some lyrics have been cut, the array can be saved to document
+        saveArray.array = scrapsToShareData.array
+        scrapsDocument.lyricsData = saveArray
+        
+        scrapsDocument.save(to: url, for: .forCreating) { (success) in
+            if success {
+                print("file was saved successfully")
+                print(scrapsDocument.lyricsData?.array)
+                
+            }
         }
         
         
