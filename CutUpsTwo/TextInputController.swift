@@ -80,19 +80,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
-            return
-        }
         
-        
-        
-        let scrapsDocument = ScrapsDocument(fileURL: url)
-        
-        scrapsDocument.open { (success) in
-            print("Document loaded succesfully")
-            print(scrapsDocument.lyricsData?.array)
-            
-        }
         
 //        self.view.backgroundColor = .white
         
@@ -397,6 +385,26 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         let textVC = LyricsController()
         
         textVC.scrapsSendDelegate = self
+        
+        guard let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
+                         return
+                     }
+                     
+                     let scrapsDocument = ScrapsDocument(fileURL: url)
+                     
+                     let saveArray = scrapsToShareData
+                     
+                     //If some lyrics have been cut, the array can be saved to document
+                     saveArray.array = scrapsToShareData.array
+                     scrapsDocument.lyricsData = saveArray
+                     
+                     scrapsDocument.save(to: url, for: .forCreating) { (success) in
+                         if success {
+                             print("file was saved successfully")
+                             print(scrapsDocument.lyricsData?.array)
+                             
+                         }
+                     }
 
 
         
@@ -469,25 +477,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
 
         }
         
-        guard let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
-            return
-        }
-        
-        let scrapsDocument = ScrapsDocument(fileURL: url)
-        
-        let saveArray = scrapsToShareData
-        
-        //If some lyrics have been cut, the array can be saved to document
-        saveArray.array = scrapsToShareData.array
-        scrapsDocument.lyricsData = saveArray
-        
-        scrapsDocument.save(to: url, for: .forCreating) { (success) in
-            if success {
-                print("file was saved successfully")
-                print(scrapsDocument.lyricsData?.array)
-                
-            }
-        }
+       
         
         
         lyricTextView.text = ""

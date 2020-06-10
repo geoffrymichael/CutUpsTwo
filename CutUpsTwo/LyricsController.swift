@@ -25,6 +25,7 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
     
     lazy var scraps = scrapsToShareData.array
     
+       
     override func viewDidLoad() {
         super.viewDidLoad()
         
