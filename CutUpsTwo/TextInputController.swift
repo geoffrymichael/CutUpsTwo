@@ -27,26 +27,13 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
     
     var scrapsToShare = [String]()
     
-//    var scrap: String? {
-//        didSet {
-//            previewLabel.text = scrap
-//            previewLabel.textColor = .black
-//        }
-//    }
+
     
     let activityIN = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.view.backgroundColor = .white
-        
-        
-        
-//        activityIndicator.center = view.center
-//
-//        view.addSubview(activityIndicator)
-        
-        
+
         
         
         //Remove the "back" text from the back button
@@ -66,8 +53,6 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         let edit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: Selector(("handleSend")))
         self.navigationItem.leftBarButtonItem = edit
         
-
-//        let automaticButton = UIBarButtonItem(title: "Automatic", style: .plain, target: self, action: #selector(automaticCut))
         
         let randomButton = UIBarButtonItem(title: "Random", style: .plain, target: self, action: #selector(onRandom))
         
@@ -184,29 +169,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         }
     }
     
-    //UILabel needs to be subclassed in order to create edge insets for its text
-//    class PreviewLabel: UILabel {
-//        override func drawText(in rect: CGRect) {
-//            let insets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-//            super.drawText(in: rect.inset(by: insets))
-//        }
-//
-//    }
-    
-//    lazy var previewLabel: PreviewLabel = {
-//        let label = PreviewLabel()
-//        label.textColor = .placeholderText
-//        label.text = "Most Recently Manually Cut/Copied Line"
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.backgroundColor = .white
-//
-//        return label
-//    }()
-    
-    
-    
-    
-    
+
     var placeholderLabel = UILabel()
     
     func textViewDidChange(_ textView: UITextView) {
@@ -217,11 +180,9 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
     
     lazy var lyricTextView: UITextView = {
         let view = UITextView()
-//        view.backgroundColor = UIColor.
+
         view.font = UIFont.systemFont(ofSize: 16)
-        
-//         var activityIN: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 100, y: 200, width: 50, height: 50)) as UIActivityIndicatorView
-        
+
         activityIN.center = CGPoint(x: 180, y: 180)
         activityIN.hidesWhenStopped = true
         
@@ -285,18 +246,9 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
     var textViewBottomanchor: NSLayoutConstraint?
     
     func setupLyricTextView() {
-        
 
-//        view.addSubview(previewLabel)
-//
-//
         let margins = view.layoutMarginsGuide
-//        NSLayoutConstraint.activate([
-//           previewLabel.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
-//           previewLabel.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
-//           previewLabel.topAnchor.constraint(equalTo: margins.topAnchor, constant: 8),
-//            previewLabel.heightAnchor.constraint(equalToConstant: 50)
-//        ])
+
         
         view.addSubview(lyricTextView)
         
@@ -384,28 +336,16 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
                     
                     let myString = str.components(separatedBy: .newlines)
                     
-                    var randomOne: Int?
-                    var randomTwo: Int?
-                    var randomThree: Int?
-                    
-                    if myString.count > 400 {
-                        randomOne = Int.random(in: 350...myString.count - 3)
-                        randomTwo = (randomOne ?? 0) + 1
-                        randomThree = (randomTwo ?? 0) + 2
-                    }
-                    
-                    
-
+                    // Print source author and work of gutenberg text
                     print(myString[0])
 
-    //                print(myString[7000], myString[7001], myString[7002])
                     DispatchQueue.main.async {
                         self.activityIN.stopAnimating()
                         self.placeholderLabel.text = ""
                         
                         self.lyricTextView.text = substring
                        
-//                        self.lyricTextView.text = "\(myString[randomOne ?? 0]), \(myString[randomTwo ?? 0]), \(myString[randomThree ?? 0])"
+
                     }
                     
                     
@@ -428,6 +368,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
         
     }
     
+    
     @objc func onHelp() {
         print("Help Pressed")
         
@@ -442,6 +383,7 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
     
 }
 
+//Extension for having keyboard dissapear on "done" button click
 extension UITextView {
     
     func addDoneButton(title: String, target: Any, selector: Selector) {
@@ -458,7 +400,7 @@ extension UITextView {
 }
 
 // MARK: VNDocumentCameraViewControllerDelegate
-
+// For vision text scanning
 extension TextInputController: VNDocumentCameraViewControllerDelegate {
     
     public func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
