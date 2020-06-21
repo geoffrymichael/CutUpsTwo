@@ -374,6 +374,14 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
                     }
                 } else {
                     let str = String(decoding: data!, as: UTF8.self)
+                    
+                    
+                    let randomInt = Int.random(in: 400...str.count - 301)
+                                                                             
+                    let substring = str[randomInt..<randomInt + 300]
+                    
+                    
+                    
                     let myString = str.components(separatedBy: .newlines)
                     
                     var randomOne: Int?
@@ -394,8 +402,10 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
                     DispatchQueue.main.async {
                         self.activityIN.stopAnimating()
                         self.placeholderLabel.text = ""
+                        
+                        self.lyricTextView.text = substring
                        
-                        self.lyricTextView.text = "\(myString[randomOne ?? 0]), \(myString[randomTwo ?? 0]), \(myString[randomThree ?? 0])"
+//                        self.lyricTextView.text = "\(myString[randomOne ?? 0]), \(myString[randomTwo ?? 0]), \(myString[randomThree ?? 0])"
                     }
                     
                     
@@ -482,5 +492,33 @@ extension TextInputController: VNDocumentCameraViewControllerDelegate {
             })
         }
 
+    }
+}
+
+//String Extension to allow for selecting string sections via integers
+extension String {
+
+    var length: Int {
+        return count
+    }
+
+    subscript (i: Int) -> String {
+        return self[i ..< i + 1]
+    }
+
+    func substring(fromIndex: Int) -> String {
+        return self[min(fromIndex, length) ..< length]
+    }
+
+    func substring(toIndex: Int) -> String {
+        return self[0 ..< max(0, toIndex)]
+    }
+
+    subscript (r: Range<Int>) -> String {
+        let range = Range(uncheckedBounds: (lower: max(0, min(length, r.lowerBound)),
+                                            upper: min(length, max(0, r.upperBound))))
+        let start = index(startIndex, offsetBy: range.lowerBound)
+        let end = index(start, offsetBy: range.upperBound - range.lowerBound)
+        return String(self[start ..< end])
     }
 }
