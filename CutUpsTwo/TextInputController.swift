@@ -102,7 +102,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
 
      */
     
-    //The camera button sends to the documentscanner controller
+    //The camera button sends to the documentscanner controller or to photo library to scan and recognize text
     @objc func onCamera() {
 //         let documentCameraViewController = VNDocumentCameraViewController()
 //               documentCameraViewController.delegate = self
@@ -217,7 +217,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
         }
     }
     
-
+    //Placeholder logic for initial help text underlay
     var placeholderLabel = UILabel()
     
     func textViewDidChange(_ textView: UITextView) {
@@ -225,7 +225,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
        }
     
    
-    
+    //Laybout textview on first load with temporary instructions underlay and activity indicator
     lazy var lyricTextView: UITextView = {
         let view = UITextView()
 
@@ -291,6 +291,10 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
         })
     }
     
+    
+    
+    
+    //Layout initial lyric view text box
     var textViewBottomanchor: NSLayoutConstraint?
     
     func setupLyricTextView() {
@@ -355,6 +359,8 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
         
     }
     
+    
+    //Function to retrieve random passages from project gutenberg
     @objc func onRandom() {
             print("Random was pressed")
             
@@ -448,7 +454,7 @@ extension UITextView {
 }
 
 // MARK: VNDocumentCameraViewControllerDelegate
-// For vision text scanning
+// For vision text scanning via Document Scan camera
 extension TextInputController: VNDocumentCameraViewControllerDelegate {
     
     public func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
@@ -486,6 +492,7 @@ extension TextInputController: VNDocumentCameraViewControllerDelegate {
 }
 
 
+//Extension for photo library vision text scan
 extension TextInputController: UIImagePickerControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
