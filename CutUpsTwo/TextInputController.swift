@@ -14,7 +14,7 @@ class ScrapsToShareData {
     var array: [String] = []
 }
 
-class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArrayDelegate {
+class TextInputController: UIViewController, UITextViewDelegate, UINavigationControllerDelegate, SendScrapsArrayDelegate {
     
     
     func onSend(scraps: [String]) {
@@ -104,9 +104,58 @@ class TextInputController: UIViewController, UITextViewDelegate, SendScrapsArray
     
     //The camera button sends to the documentscanner controller
     @objc func onCamera() {
-         let documentCameraViewController = VNDocumentCameraViewController()
-               documentCameraViewController.delegate = self
-               present(documentCameraViewController, animated: true)
+//         let documentCameraViewController = VNDocumentCameraViewController()
+//               documentCameraViewController.delegate = self
+//               present(documentCameraViewController, animated: true)
+        
+        let prompt = UIAlertController(title: "Choose a Photo",
+                                       message: "Please choose a photo.",
+                                       preferredStyle: .actionSheet)
+        
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        
+        func presentCamera(_ _: UIAlertAction) {
+            let documentCameraViewController = VNDocumentCameraViewController()
+            documentCameraViewController.delegate = self
+            present(documentCameraViewController, animated: true)
+//            imagePicker.sourceType = .camera
+//            self.present(imagePicker, animated: true)
+        }
+        
+        let cameraAction = UIAlertAction(title: "Camera",
+                                         style: .default,
+                                         handler: presentCamera)
+        
+        func presentLibrary(_ _: UIAlertAction) {
+            imagePicker.sourceType = .photoLibrary
+            self.present(imagePicker, animated: true)
+        }
+        
+        let libraryAction = UIAlertAction(title: "Photo Library",
+                                          style: .default,
+                                          handler: presentLibrary)
+        
+//        func presentAlbums(_ _: UIAlertAction) {
+//            imagePicker.sourceType = .savedPhotosAlbum
+//            self.present(imagePicker, animated: true)
+//        }
+//
+//        let albumsAction = UIAlertAction(title: "Saved Albums",
+//                                         style: .default,
+//                                         handler: presentAlbums)
+        
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: .cancel,
+                                         handler: nil)
+        
+        prompt.addAction(cameraAction)
+        prompt.addAction(libraryAction)
+//        prompt.addAction(albumsAction)
+        prompt.addAction(cancelAction)
+        
+        self.present(prompt, animated: true, completion: nil)
     }
     
     
@@ -436,6 +485,52 @@ extension TextInputController: VNDocumentCameraViewControllerDelegate {
 
     }
 }
+
+
+extension TextInputController: UIImagePickerControllerDelegate {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+       
+        
+        lyricTextView.text = ""
+        // dismiss the document camera
+        dismiss(animated: true, completion: nil)
+        
+        activityIN.isHidden = false
+        activityIN.startAnimating()
+        
+        textRecognitionWorkQueue.async {
+            self.resultingText = ""
+            
+            let image: UIImage = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
+                if let cgImage = image.cgImage {
+                    let requestHandler = VNImageRequestHandler(cgImage: cgImage, options: [:])
+                    
+                    do {
+                        try requestHandler.perform(self.requests)
+                    } catch {
+                        print(error)
+                    }
+                }
+                self.resultingText += "\n\n"
+            
+            DispatchQueue.main.async(execute: {
+                self.lyricTextView.text = self.resultingText
+                self.placeholderLabel.text = ""
+                self.activityIN.isHidden = true
+            })
+        }
+    }
+    
+    
+}
+
+
 
 //String Extension to allow for selecting string sections via integers
 extension String {
