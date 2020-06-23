@@ -114,8 +114,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
         
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.allowsEditing = true
-        
+                
         func presentCamera(_ _: UIAlertAction) {
             let documentCameraViewController = VNDocumentCameraViewController()
             documentCameraViewController.delegate = self
@@ -507,7 +506,7 @@ extension TextInputController: UIImagePickerControllerDelegate {
         textRecognitionWorkQueue.async {
             self.resultingText = ""
             
-            let image: UIImage = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
+            let image: UIImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
                 if let cgImage = image.cgImage {
                     let requestHandler = VNImageRequestHandler(cgImage: cgImage, options: [:])
                     
