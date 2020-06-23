@@ -1,5 +1,12 @@
 # CutUpsTwo
 
+Version 2.4
+
+Implimented the ability to scan and recognize text from still images from iOS photo library. 
+
+Updated algorithm to provide more and better text data for random feature.
+
+
 
 Version 2.1
 
