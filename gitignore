@@ -3,7 +3,7 @@
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
 ## Sensitive Info
-/SecretKeys.swift
+CutUpsTwo/SecretKeys.swift
 
 ## User settings
 xcuserdata/
