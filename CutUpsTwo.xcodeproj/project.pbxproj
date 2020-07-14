@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		63285EE224BD413100365B8D /* SecretKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63285EE124BD413100365B8D /* SecretKeys.swift */; };
 		637E563624218E4B00FA2739 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637E563524218E4B00FA2739 /* HelpViewController.swift */; };
 		63953A8923CBC07B0033ACFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63953A8823CBC07B0033ACFF /* AppDelegate.swift */; };
 		63953A8B23CBC07B0033ACFF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63953A8A23CBC07B0033ACFF /* SceneDelegate.swift */; };
@@ -21,7 +20,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		63285EE124BD413100365B8D /* SecretKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretKeys.swift; sourceTree = "<group>"; };
 		637E563524218E4B00FA2739 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		63953A8523CBC07B0033ACFF /* Cut-ups.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cut-ups.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		63953A8823CBC07B0033ACFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,7 +66,6 @@
 			children = (
 				63953A8823CBC07B0033ACFF /* AppDelegate.swift */,
 				63953A9C23CBC0AB0033ACFF /* TextInputController.swift */,
-				63285EE124BD413100365B8D /* SecretKeys.swift */,
 				637E563524218E4B00FA2739 /* HelpViewController.swift */,
 				63953AA323CD2E950033ACFF /* LyricsController.swift */,
 				63953AA523CD3F380033ACFF /* ScrapTableViewCell.swift */,
@@ -166,7 +163,6 @@
 				63953AA423CD2E950033ACFF /* LyricsController.swift in Sources */,
 				63953A9D23CBC0AB0033ACFF /* TextInputController.swift in Sources */,
 				63953A8B23CBC07B0033ACFF /* SceneDelegate.swift in Sources */,
-				63285EE224BD413100365B8D /* SecretKeys.swift in Sources */,
 				63953A8D23CBC07B0033ACFF /* ContentView.swift in Sources */,
 				63953AA623CD3F380033ACFF /* ScrapTableViewCell.swift in Sources */,
 			);
