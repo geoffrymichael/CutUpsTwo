@@ -14,6 +14,45 @@ class ScrapsToShareData {
     var array: [String] = []
 }
 
+//Begin wordnik data models
+struct Word: Codable {
+    let examples: [Example]
+}
+
+// MARK: - Example
+struct Example: Codable {
+    let provider: Provider
+    let year: Int
+    let rating: Double
+    let url: String
+    let word, text: String
+    let documentID, exampleID: Int
+    let title: String
+    let author: String?
+    let attributionText: String?
+
+    enum CodingKeys: String, CodingKey {
+        case provider, year, rating, url, word, text, attributionText
+        case documentID = "documentId"
+        case exampleID = "exampleId"
+        case title, author
+    }
+}
+//End wordnik data models
+
+
+
+// MARK: - Provider
+struct Provider: Codable {
+    let id: Int
+}
+
+struct RandomWord: Codable {
+    let id: Int
+    let word: String
+}
+
+
 class TextInputController: UIViewController, UITextViewDelegate, UINavigationControllerDelegate, SendScrapsArrayDelegate {
     
     
@@ -450,13 +489,118 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
     
     
     @objc func randomWordnik() {
-        let key = SecretKeys().wordnikAPI
         
-        print("Random wordnik was pressed")
+        activityIN.isHidden = false
+        activityIN.startAnimating()
         
-        
-        
+        let wordAPI = SecretKeys().wordnikAPI
+    //        dispatchFetch.enter()
+           
+        wordNikFetchRandomWord(url: "https://api.wordnik.com/v4/words.json/randomWord?hasDictionaryDef=true&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=-1&limit=1&api_key=\(wordAPI)")
+    //        dispatchFetch.leave()
+            
+    //        wordNikFetchWorddetails()
+        activityIN.stopAnimating()
+            
     }
+    
+    @objc func wordNikFetchRandomWord(url: String) {
+                
+        let wordAPI = SecretKeys().wordnikAPI
+                var fetchedWord = ""
+                let dispatchFetch = DispatchGroup()
+                
+
+                 let session = URLSession.shared
+                
+                 
+                 let randomWord =  "https://api.wordnik.com/v4/words.json/randomWord?hasDictionaryDef=true&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=-1&limit=1&api_key=\(wordAPI)"
+                dispatchFetch.enter()
+        activityIN.startAnimating()
+                 session.dataTask(with: URL(string: randomWord)!) { (data, response, error) in
+                     
+                     if error != nil {
+                         DispatchQueue.main.async {
+                             print(error as Any)
+                            self.lyricTextView.text = "Something went wrong. Are you sure you are connected to the internet or I have reached my limit of website access"
+                            self.activityIN.stopAnimating()
+                         }
+                     } else {
+                         
+                         let decoder = JSONDecoder()
+                        
+                         let word = try? decoder.decode(RandomWord.self, from: data ?? Data())
+                         print(word?.word as Any, "⛳️")
+                        
+                        fetchedWord = word?.word ?? "bear"
+                        
+                        guard let wordURL = URL(string: "https://api.wordnik.com/v4/word.json/\(fetchedWord )/examples?includeDuplicates=false&useCanonical=false&limit=5&api_key=\(wordAPI)") else { return }
+                        
+                        print(response as Any)
+                        
+                        dispatchFetch.leave()
+                        
+                        
+                        
+                        dispatchFetch.enter()
+                        
+                        URLSession.shared.dataTask(with: wordURL) { (data, response, error) in
+                                   if error != nil {
+                                       DispatchQueue.main.async {
+                                           print(error as Any)
+                                       }
+                                   } else {
+                                       
+                                       let decoder = JSONDecoder()
+                                      
+                                       let wordJSON = try? decoder.decode(Word.self, from: data ?? Data())
+                                       DispatchQueue.main.async {
+                                        
+                                        
+    //                                       if wordJSON?.examples.randomElement()?.attributionText != nil || wordJSON?.examples.randomElement()?.text == nil {
+    //                                           print("Please try random again")
+    //                                        self.lyricTextView.text = "Please try random again"
+    //                                        print(response as Any, "🔶")
+    //                                       } else {
+    //                                        print(response as Any, "🔴")
+    //                                           print(wordJSON?.examples.randomElement()?.text as Any)
+    //                                        self.lyricTextView.text = wordJSON?.examples.randomElement()?.text
+                                        if error != nil {
+                                            self.lyricTextView.text = "Something went wrong. Are you sure you are connected to the internet or I have reached my limit of website access"
+                                            self.activityIN.stopAnimating()
+                                        } else {
+                                            guard let examples = wordJSON?.examples else { return }
+                                            
+                                            print(examples.randomElement()?.text as Any)
+                                            self.lyricTextView.text = examples.randomElement()?.text
+                                            self.placeholderLabel.text = ""
+                                            self.activityIN.stopAnimating()
+                                        }
+                                        
+                                        
+                                        
+                                        
+                                           
+                                        dispatchFetch.leave()
+                                           
+                                           
+                                           
+                                       }
+                                       
+                                   }
+                                   
+                               }.resume()
+
+                         
+                     }
+                    
+                     
+                 }.resume()
+                
+                 
+    }
+    
+    
     
     //A function to parse text by carriage returns (by line)
     @objc func automaticCut() {
