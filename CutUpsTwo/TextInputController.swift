@@ -109,12 +109,13 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
 //               present(documentCameraViewController, animated: true)
         
         let prompt = UIAlertController(title: "Choose a Photo",
-                                       message: "Please choose a photo.",
+                                       message: "Please choose the source for an image with text you wish to scan in.",
                                        preferredStyle: .actionSheet)
         
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-                
+        
+        //Presents Core Vision Document Scanner
         func presentCamera(_ _: UIAlertAction) {
             let documentCameraViewController = VNDocumentCameraViewController()
             documentCameraViewController.delegate = self
@@ -127,6 +128,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
                                          style: .default,
                                          handler: presentCamera)
         
+        //Presents Photo Library
         func presentLibrary(_ _: UIAlertAction) {
             imagePicker.sourceType = .photoLibrary
             self.present(imagePicker, animated: true)
@@ -362,7 +364,45 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
     
     //Function to retrieve random passages from project gutenberg
     @objc func onRandom() {
-            print("Random was pressed")
+            
+        
+        let randomMenu = UIAlertController(title: "Choose a Source", message: "Select to import either a random book passage or a random dictionary example sentence", preferredStyle: .actionSheet)
+        
+        func presentGutenberg(_ _: UIAlertAction) {
+            randomGutenberg()
+        }
+        
+        let gutenbergAction = UIAlertAction(title: "Book Passage",
+        style: .default,
+        handler: presentGutenberg)
+        
+        
+        
+        func presentDictionaryExample(_ _: UIAlertAction) {
+            randomWordnik()
+        }
+        
+        let dictionaryAction = UIAlertAction(title: "Dictionary Example Sentence", style: .default, handler: presentDictionaryExample)
+        
+        
+        
+        let cancelAction = UIAlertAction(title: "Cancel",
+        style: .cancel,
+        handler: nil)
+        
+        
+        randomMenu.addAction(gutenbergAction)
+        randomMenu.addAction(dictionaryAction)
+        randomMenu.addAction(cancelAction)
+
+        
+        self.present(randomMenu, animated: true, completion: nil)
+
+    }
+    
+    
+    @objc func randomGutenberg() {
+        print("Random was pressed")
             
            
             
@@ -405,8 +445,18 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
                     
                 }
             }.resume()
+        
     }
     
+    
+    @objc func randomWordnik() {
+        let key = SecretKeys().wordnikAPI
+        
+        print("Random wordnik was pressed")
+        
+        
+        
+    }
     
     //A function to parse text by carriage returns (by line)
     @objc func automaticCut() {
