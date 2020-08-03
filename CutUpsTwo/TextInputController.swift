@@ -86,7 +86,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
     }
     
     
-    //MARK: Vision Implimentation
+    
     
     //MARK: Vision License
     /*
@@ -101,6 +101,9 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
      */
+    
+    
+    //MARK: Camera Scanning and Vision Implimentation
     
     //The camera button sends to the documentscanner controller or to photo library to scan and recognize text
     @objc func onCamera() {
@@ -225,7 +228,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
        }
     
    
-    //Laybout textview on first load with temporary instructions underlay and activity indicator
+    //MARK: Laybout textview on first load with temporary instructions underlay and activity indicator
     lazy var lyricTextView: UITextView = {
         let view = UITextView()
 
@@ -294,7 +297,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
     
     
     
-    //Layout initial lyric view text box
+    //MARK: Layout initial lyric view text box
     var textViewBottomanchor: NSLayoutConstraint?
     
     func setupLyricTextView() {
@@ -360,7 +363,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
     }
     
     
-    //Function to retrieve random passages from project gutenberg
+    //MARK: Function to retrieve random passages from project gutenberg
     @objc func onRandom() {
             print("Random was pressed")
             
@@ -410,7 +413,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
     
     
     
-    //A function to parse text by carriage returns (by line)
+    //MARK: Main function to choose how sections of text will be split
     @objc func automaticCut() {
         
         
@@ -440,16 +443,19 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
         
         func byFiveWords(_ _: UIAlertAction) {
             
+            //Replace new lines with spaces
+            let newString = lyricTextView.text.replacingOccurrences(of: "\n", with: " ", options: .literal, range: nil)
             
+            //Use array chunk extension to split by chosen iterator
+            let array = newString.split(separator: " ").chunked(into: 5)
             
-            let splitArray = lyricTextView.text.split(separator: " ").chunked(into: 5)
+            //Append the newly defined lines into the data array
+            for (_ , thing) in array.enumerated() {
+                scrapsToShareData.array.append(thing.joined(separator: " "))
+                print(thing)
+            }
             
-            print(splitArray, "📀")
-            
-            
-            
-            
-            
+            lyricTextView.text = ""
             
         }
         
@@ -626,7 +632,7 @@ extension String {
     }
 }
 
-
+//MARK: Array extension to split an array into chosen denominations. Used in this app for selected cut-ups section sizes
 extension Array {
     func chunked(into size: Int) -> [[Element]] {
         return stride(from: 0, to: count, by: size).map {
