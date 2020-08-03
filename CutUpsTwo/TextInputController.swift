@@ -408,11 +408,13 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
     }
     
     
+    
+    
     //A function to parse text by carriage returns (by line)
     @objc func automaticCut() {
         
         
-        let prompt = UIAlertController(title: "Choose How Finely to Cut Your Text",
+        let prompt = UIAlertController(title: "Choose How Finely You Want to Cut-up Your Text",
                                        message: "Please choose a cut method.",
                                        preferredStyle: .actionSheet)
         
@@ -430,14 +432,27 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
         
         //Split text by single words
         func byWord(_ _: UIAlertAction) {
-            let components = lyricTextView.text.components(separatedBy: " ")
-            
-            for word in components {
-                self.scrapsToShareData.array.append(word)
-            }
+
+            scrapsToShareData.array = lyricTextView.text.components(separatedBy: " ")
             
             lyricTextView.text = ""
         }
+        
+        func byFiveWords(_ _: UIAlertAction) {
+            
+            
+            
+            let splitArray = lyricTextView.text.split(separator: " ").chunked(into: 5)
+            
+            print(splitArray, "📀")
+            
+            
+            
+            
+            
+            
+        }
+        
         
         
         let byLineAction = UIAlertAction(title: "Single Line",
@@ -445,6 +460,8 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
                                          handler: byLine)
         
         let byWordAction = UIAlertAction(title: "Single Word", style: .default, handler: byWord)
+        
+        let byFiveWordsAction = UIAlertAction(title: "Every Fifth Word", style: .default, handler: byFiveWords)
         
         
         
@@ -454,6 +471,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
         
         prompt.addAction(byLineAction)
         prompt.addAction(byWordAction)
+        prompt.addAction(byFiveWordsAction)
         prompt.addAction(cancelAction)
         
         self.present(prompt, animated: true, completion: nil)
@@ -605,5 +623,14 @@ extension String {
         let start = index(startIndex, offsetBy: range.lowerBound)
         let end = index(start, offsetBy: range.upperBound - range.lowerBound)
         return String(self[start ..< end])
+    }
+}
+
+
+extension Array {
+    func chunked(into size: Int) -> [[Element]] {
+        return stride(from: 0, to: count, by: size).map {
+            Array(self[$0 ..< Swift.min($0 + size, count)])
+        }
     }
 }
