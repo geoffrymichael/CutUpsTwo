@@ -410,14 +410,56 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
     
     //A function to parse text by carriage returns (by line)
     @objc func automaticCut() {
-        lyricTextView.text.enumerateLines { line, _ in
+        
+        
+        let prompt = UIAlertController(title: "Choose How Finely to Cut Your Text",
+                                       message: "Please choose a cut method.",
+                                       preferredStyle: .actionSheet)
+        
+        
+        func byLine(_ _: UIAlertAction) {
+            lyricTextView.text.enumerateLines { line, _ in
+                
+                self.scrapsToShareData.array.append(line)
+                
+            }
             
-            self.scrapsToShareData.array.append(line)
-
+            
+            lyricTextView.text = ""
+        }
+        
+        //Split text by single words
+        func byWord(_ _: UIAlertAction) {
+            let components = lyricTextView.text.components(separatedBy: " ")
+            
+            for word in components {
+                self.scrapsToShareData.array.append(word)
+            }
+            
+            lyricTextView.text = ""
         }
         
         
-        lyricTextView.text = ""
+        let byLineAction = UIAlertAction(title: "Single Line",
+                                         style: .default,
+                                         handler: byLine)
+        
+        let byWordAction = UIAlertAction(title: "Single Word", style: .default, handler: byWord)
+        
+        
+        
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: .cancel,
+                                         handler: nil)
+        
+        prompt.addAction(byLineAction)
+        prompt.addAction(byWordAction)
+        prompt.addAction(cancelAction)
+        
+        self.present(prompt, animated: true, completion: nil)
+        
+        
+        
         
         
     }
