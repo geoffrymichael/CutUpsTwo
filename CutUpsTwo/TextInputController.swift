@@ -115,6 +115,10 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
                                        message: "Please choose a photo.",
                                        preferredStyle: .actionSheet)
         
+        //UIAlert view definitions necessary for iPad
+        prompt.popoverPresentationController?.sourceView = self.view
+        prompt.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY,width: 0,height: 0)
+        
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
                 
@@ -419,9 +423,14 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
     @objc func automaticCut() {
         
         
+        
         let prompt = UIAlertController(title: "Choose How Finely You Want to Split Your Text",
                                        message: nil,
                                        preferredStyle: .actionSheet)
+        
+        //UIAlert view definitions necessary for iPad
+        prompt.popoverPresentationController?.sourceView = self.view
+        prompt.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY,width: 0,height: 0)
         
         
         func byLine(_ _: UIAlertAction) {
