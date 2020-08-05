@@ -417,8 +417,8 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
     @objc func automaticCut() {
         
         
-        let prompt = UIAlertController(title: "Choose How Finely You Want to Cut-up Your Text",
-                                       message: "Please choose a cut method.",
+        let prompt = UIAlertController(title: "Choose How Finely You Want to Split Your Text",
+                                       message: nil,
                                        preferredStyle: .actionSheet)
         
         
@@ -459,17 +459,34 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
             
         }
         
+        func byThreeWords(_ _: UIAlertAction) {
+            
+            //Replace new lines with spaces
+            let newString = lyricTextView.text.replacingOccurrences(of: "\n", with: " ", options: .literal, range: nil)
+            
+            //Use array chunk extension to split by chosen iterator
+            let array = newString.split(separator: " ").chunked(into: 3)
+            
+            //Append the newly defined lines into the data array
+            for (_ , thing) in array.enumerated() {
+                scrapsToShareData.array.append(thing.joined(separator: " "))
+                print(thing)
+            }
+            
+            lyricTextView.text = ""
+            
+        }
         
         
-        let byLineAction = UIAlertAction(title: "Single Line",
+        let byLineAction = UIAlertAction(title: "Individual Lines",
                                          style: .default,
                                          handler: byLine)
         
-        let byWordAction = UIAlertAction(title: "Single Word", style: .default, handler: byWord)
+        let byWordAction = UIAlertAction(title: "Single Words", style: .default, handler: byWord)
         
         let byFiveWordsAction = UIAlertAction(title: "Every Fifth Word", style: .default, handler: byFiveWords)
         
-        
+        let byThreeWordsAction = UIAlertAction(title: "Every Third Word", style: .default, handler: byThreeWords)
         
         let cancelAction = UIAlertAction(title: "Cancel",
                                          style: .cancel,
@@ -478,6 +495,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
         prompt.addAction(byLineAction)
         prompt.addAction(byWordAction)
         prompt.addAction(byFiveWordsAction)
+        prompt.addAction(byThreeWordsAction)
         prompt.addAction(cancelAction)
         
         self.present(prompt, animated: true, completion: nil)
