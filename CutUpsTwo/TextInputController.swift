@@ -256,6 +256,8 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
 
                                 Blend it all together and cut-it-up to make something new. How fun.
                                 
+                                Click the ⏍ button to export your Cut-up to your favorite notes app, a text, etc.
+                                
                                 Click on Help for more detailed instructions.
 
                                 
