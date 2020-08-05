@@ -46,23 +46,19 @@ class HelpViewController: UIViewController, UITextViewDelegate {
     
     •) Any text that is separated by a "return" will be counted as a new line
 
-    •) You can use the "return" on the iOS keyboard to simulate cutting the text anywhere you want. Many source materials may already automatically have lines separated when you paste them in, but it could be fun to cut up lines even further, perhaps in-half 
+    •) Pick a Cut-up option by clicking on the scissors icon. A single line is anything seprated by a "carraige return". Most text pasted from the interenet will have new line formatting in them already. You can also use the iOS keyboard to add new line sperations manually. The options of single words, every fifth and every third will split the text into their respective sizes. Once the text is cut it will be sent to the editing board which you can access by clicking the Edit button.
 
     •) Feel free to type in extra lines on the fly or edit existing lines using the keyboard
     
     •) Copying and pasting from different sources is a good way to get interesting blends
 
-    •) You can click on the 📷 icon to attempt to scan in physical sources of printed texts. Artists using the Cut-up technique used to cut out newspaper articles or other random text and cut them into their other sources. You can use this feature to mimic this process. Try to run the scan feature in a clean, well-lighted place. You can have the software try to automatically scan a document when it recognizses the text. This process will be indicated by a light blue overlay while trying to process and should result in more reliable results. However, it is more difficult to get a scan this way-- you must keep the camera still, the text must be clear, and you should be in a well-lighted environment. Alternatively, you can also manually press the shutter over an amount of text, and then outline the text you want to scan in the overlay that appears by dragging the corners of the selection box around your text. The results of these scans may be less accurate. When you are satisified with your scan, or scans, press the "SAVE" button to place the text in the text input screen. Please note, the analyzing process can take a few seconds. Make sure to look over and manually edit the resultant text for any inaccuracies. Once you are satisfied, send the text the editing board.
+    •) You can click on the 📷 to input text from physical source materials. You can scan text on the fly or use a picture of a text source from your photo library.
 
-    •) The random button will pull in a compeltely randomized snippet of text from a book from gutenberg.org. It will most likely need to be cleaned up. 
+    •) The random button will pull in a compeltely randomized snippet of text from a book from gutenberg.org. the fomratting will most likely need to be cleaned up manually.
         
-    •) When you are satisfied with your formatting, clicking the ✄ button will cut the text into lines and send them to the editing board
+    •) Once you have cut your initial text, click on Edit to go to the editing board.
 
-    •) You can also use iOS' built-in copy and paste to manually send a single line, words, or word to the editing board
-
-    •) To begin rearranging the lines, click on the "Edit" button
-    
-    •) Rearranging can be done manually by clicking on a line and dragging it, or automatically by clicking the 🔀 button. You can press shuffle as many times as you wish
+    •) Rearranging can be done manually by dragging and dropping lines, or automatically by clicking the 🔀 button. You can press shuffle as many times as you wish
     
     •) You can go back to the input screen and add more content at any time
     
