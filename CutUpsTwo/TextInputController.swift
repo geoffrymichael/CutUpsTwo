@@ -63,9 +63,10 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
         
         let cameraButton = UIBarButtonItem(image: UIImage(systemName: "camera"), style: .plain, target: self, action: #selector(onCamera))
         
+        let foldInButton = UIBarButtonItem(title: "Foldin", style: .plain, target: self, action: #selector(foldIn))
         
         
-        self.navigationItem.setRightBarButtonItems([helpButton, randomButton, cameraButton, automaticButton], animated: true)
+        self.navigationItem.setRightBarButtonItems([helpButton, randomButton, cameraButton, automaticButton, foldInButton], animated: true)
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(clipboardChanged),
@@ -85,7 +86,11 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
     
     }
     
-    
+    @objc func foldIn() {
+        let vc = FoldinViewController()
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
     
     //MARK: Vision License

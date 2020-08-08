@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		637E563624218E4B00FA2739 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637E563524218E4B00FA2739 /* HelpViewController.swift */; };
+		638C5D6D24DE5FFF00238D42 /* FoldinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638C5D6C24DE5FFF00238D42 /* FoldinViewController.swift */; };
 		63953A8923CBC07B0033ACFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63953A8823CBC07B0033ACFF /* AppDelegate.swift */; };
 		63953A8B23CBC07B0033ACFF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63953A8A23CBC07B0033ACFF /* SceneDelegate.swift */; };
 		63953A8D23CBC07B0033ACFF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63953A8C23CBC07B0033ACFF /* ContentView.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		637E563524218E4B00FA2739 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		638C5D6C24DE5FFF00238D42 /* FoldinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldinViewController.swift; sourceTree = "<group>"; };
 		63953A8523CBC07B0033ACFF /* Cut-ups.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cut-ups.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		63953A8823CBC07B0033ACFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63953A8A23CBC07B0033ACFF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 			children = (
 				63953A8823CBC07B0033ACFF /* AppDelegate.swift */,
 				63953A9C23CBC0AB0033ACFF /* TextInputController.swift */,
+				638C5D6C24DE5FFF00238D42 /* FoldinViewController.swift */,
 				637E563524218E4B00FA2739 /* HelpViewController.swift */,
 				63953AA323CD2E950033ACFF /* LyricsController.swift */,
 				63953AA523CD3F380033ACFF /* ScrapTableViewCell.swift */,
@@ -158,6 +161,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				638C5D6D24DE5FFF00238D42 /* FoldinViewController.swift in Sources */,
 				637E563624218E4B00FA2739 /* HelpViewController.swift in Sources */,
 				63953A8923CBC07B0033ACFF /* AppDelegate.swift in Sources */,
 				63953AA423CD2E950033ACFF /* LyricsController.swift in Sources */,
