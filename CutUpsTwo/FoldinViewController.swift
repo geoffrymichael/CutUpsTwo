@@ -44,22 +44,62 @@ class FoldinViewController: UIViewController {
     
     func splitInHalf() {
         
-        var splitArray = [String]()
+        var byLineArray = [String]()
         
         vc.lyricTextView.text.enumerateLines { line, _ in
             
-            splitArray.append(line)
+            byLineArray.append(line)
    
         }
         
+        var linesByWordsArray: [String] = []
         
+        for (_, line) in byLineArray.enumerated() {
+            linesByWordsArray.append(line)
+        }
         
-        let firstLine = splitArray[0].components(separatedBy: " ")
+        var firstHalfArray: [String] = []
         
-        print(firstLine.count / 2)
-        print(firstLine.chunked(into: firstLine.count / 2)[0])
+        for (i, line) in linesByWordsArray.enumerated() {
+//            let wholeLine = line.components(separatedBy: " ")
+//            let chunkedLine = wholeLine.chunked(into: wholeLine.count - 1 / 2)[0].joined(separator: " ")
+//            firstHalfArray.append(chunkedLine)
+            
+//            let fullLine = line.components(separatedBy: " ")
+            
+            
+            
+            
+            let fullLine = line.components(separatedBy: " ")
+                           
+            print(fullLine.split().left)
+            
+            
+            
+
+        }
+        
+//        let firstLine = byLineArray[3].components(separatedBy: " ")
+//        
+//        print(firstLine.count / 2)
+//        print(firstLine.chunked(into: firstLine.count / 2)[0])
+//        
+//        print(firstHalfArray)
         
         
     }
     
 }
+
+
+extension Array {
+    func split() -> (left: [Element], right: [Element]) {
+        let ct = self.count
+        let half = ct / 2
+        let leftSplit = self[0 ..< half]
+        let rightSplit = self[half ..< ct]
+        return (left: Array(leftSplit), right: Array(rightSplit))
+    }
+}
+
+
