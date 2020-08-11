@@ -451,8 +451,13 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
         
         //Split text by single words
         func byWord(_ _: UIAlertAction) {
-
-            scrapsToShareData.array = lyricTextView.text.components(separatedBy: " ")
+            
+            let wordArray = lyricTextView.text.components(separatedBy: " ")
+            
+            for (_, word) in wordArray.enumerated() {
+                scrapsToShareData.array.append(word)
+            }
+            
             
             lyricTextView.text = ""
         }
