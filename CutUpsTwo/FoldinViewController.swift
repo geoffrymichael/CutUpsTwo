@@ -10,7 +10,8 @@ import Foundation
 import UIKit
 
 class FoldinViewController: UIViewController {
-        
+    
+    
     
     let vc = TextInputController()
     
@@ -58,27 +59,22 @@ class FoldinViewController: UIViewController {
             linesByWordsArray.append(line)
         }
         
-        var firstHalfArray: [String] = []
         
-        for (i, line) in linesByWordsArray.enumerated() {
-//            let wholeLine = line.components(separatedBy: " ")
-//            let chunkedLine = wholeLine.chunked(into: wholeLine.count - 1 / 2)[0].joined(separator: " ")
-//            firstHalfArray.append(chunkedLine)
-            
-//            let fullLine = line.components(separatedBy: " ")
-            
-            
-            
-            
+        var fullArray = [[String]]()
+        
+        for (_, line) in linesByWordsArray.enumerated() {
+
             let fullLine = line.components(separatedBy: " ")
                            
             print(fullLine.split().left)
             
-            
+            fullArray.append(fullLine.split().left)
             
 
         }
         
+        
+        print(fullArray)
 //        let firstLine = byLineArray[3].components(separatedBy: " ")
 //        
 //        print(firstLine.count / 2)

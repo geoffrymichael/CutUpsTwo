@@ -19,13 +19,13 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
     
     func onSend(scraps: [String]) {
         print(scraps)
-        scrapsToShareData.array = scraps
+        textScraps.array = scraps
     }
     
      
-    var scrapsToShareData = ScrapsToShareData()
+    var textScraps = ScrapsToShareData()
     
-    var scrapsToShare = [String]()
+
     
 
     
@@ -347,9 +347,9 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
 //            scrap = theString
 //            scrapsToShare.append(theString)
             
-            scrapsToShareData.array.append(theString)
+            textScraps.array.append(theString)
             
-            print(scrapsToShare)
+            
             
         }
     }
@@ -361,7 +361,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
 
 
         
-        textVC.scraps = scrapsToShareData.array
+        textVC.lyricScraps = textScraps.array
         
         print(lyricTextView.text!)
         
@@ -441,7 +441,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
         func byLine(_ _: UIAlertAction) {
             lyricTextView.text.enumerateLines { line, _ in
                 
-                self.scrapsToShareData.array.append(line)
+                self.textScraps.array.append(line)
                 
             }
             
@@ -455,7 +455,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
             let wordArray = lyricTextView.text.components(separatedBy: " ")
             
             for (_, word) in wordArray.enumerated() {
-                scrapsToShareData.array.append(word)
+                textScraps.array.append(word)
             }
             
             
@@ -472,7 +472,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
             
             //Append the newly defined lines into the data array
             for (_ , thing) in array.enumerated() {
-                scrapsToShareData.array.append(thing.joined(separator: " "))
+                textScraps.array.append(thing.joined(separator: " "))
                 print(thing)
             }
             
@@ -490,7 +490,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
             
             //Append the newly defined lines into the data array
             for (_ , thing) in array.enumerated() {
-                scrapsToShareData.array.append(thing.joined(separator: " "))
+                textScraps.array.append(thing.joined(separator: " "))
                 print(thing)
             }
             

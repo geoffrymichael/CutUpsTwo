@@ -23,7 +23,7 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
     
     var scrapsToShareData = ScrapsToShareData()
     
-    lazy var scraps = scrapsToShareData.array
+    lazy var lyricScraps = scrapsToShareData.array
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +60,7 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
     
     @objc func onShuffle() {
         
-        tableView.performBatchUpdates( { scraps.shuffle() } )
+        tableView.performBatchUpdates( { lyricScraps.shuffle() } )
          
         tableView.reloadData()
     }
@@ -68,9 +68,9 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
     @objc func onShare() {
         print("shared")
         
-        print(scraps.joined())
+        print(lyricScraps.joined())
         
-        let joinedScraps = scraps.joined(separator: "\n")
+        let joinedScraps = lyricScraps.joined(separator: "\n")
         
         let activityVC = UIActivityViewController(activityItems: [joinedScraps], applicationActivities: nil)
         
@@ -97,7 +97,7 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
         self.present(alert, animated: true)
         
         alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { action in
-            self.scraps.removeAll()
+            self.lyricScraps.removeAll()
             self.tableView.reloadData()
         }))
         
@@ -126,14 +126,14 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return scraps.count
+        return lyricScraps.count
     }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "scrapCell", for: indexPath) as! ScrapTableViewCell
         
-        cell.labelText = scraps[indexPath.row]
+        cell.labelText = lyricScraps[indexPath.row]
         
         return cell
     }
@@ -173,7 +173,7 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
             
             self.dismiss(animated: true, completion: {
                 print("something")
-                self.scrapsSendDelegate?.onSend(scraps: self.scraps)
+                self.scrapsSendDelegate?.onSend(scraps: self.lyricScraps)
             })
         }
     }
@@ -183,7 +183,7 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
       if editingStyle == .delete {
         print("Deleted")
 
-        self.scraps.remove(at: indexPath.row)
+        self.lyricScraps.remove(at: indexPath.row)
         self.tableView.deleteRows(at: [indexPath], with: .automatic)
       }
     }
@@ -206,7 +206,7 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
                 if let lyric = item.dragItem.localObject as! NSString? {
 //                    tableView.performBatchUpdates( { scraps.remove(at: sourceIndexPath.item); scraps.insert(lyric as String, at: destinationIndexPath.item) ; tableView.deleteRows(at: [sourceIndexPath], with: .automatic); tableView.insertRows(at: [destinationIndexPath], with: .automatic) } )
                     
-                    tableView.performBatchUpdates( { scraps.swapAt(sourceIndexPath.item, destinationIndexPath.item) ; tableView.deleteRows(at: [sourceIndexPath], with: .fade); tableView.insertRows(at: [destinationIndexPath], with: .fade) } )
+                    tableView.performBatchUpdates( { lyricScraps.swapAt(sourceIndexPath.item, destinationIndexPath.item) ; tableView.deleteRows(at: [sourceIndexPath], with: .fade); tableView.insertRows(at: [destinationIndexPath], with: .fade) } )
                     
                     print(lyric)
                     tableView.reloadData()
