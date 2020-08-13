@@ -33,7 +33,7 @@ Added support for Dark Mode
 Version 1.0
 03/21/2020
 
-App acceppted and released on the App Store
+App accepted and released on the App Store
 
 
 Status: March 20, 2020
