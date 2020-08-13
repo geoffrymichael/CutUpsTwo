@@ -14,13 +14,10 @@ class ScrapsToShareData {
     var array: [String] = []
 }
 
-class TextInputController: UIViewController, UITextViewDelegate, UINavigationControllerDelegate, SendScrapsArrayDelegate {
+class TextInputController: UIViewController, UITextViewDelegate, UINavigationControllerDelegate  {
     
     
-    func onSend(scraps: [String]) {
-        print(scraps)
-        textScraps.array = scraps
-    }
+    
     
      
     var textScraps = ScrapsToShareData()
@@ -76,8 +73,8 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
                 
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        let vc = LyricsController()
-        vc.scrapsSendDelegate = self
+//        let vc = LyricsController()
+//        vc.scrapsSendDelegate = self
         
 
         setupLyricTextView()
@@ -357,7 +354,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
     @objc func handleSend() {
         let textVC = LyricsController()
         
-        textVC.scrapsSendDelegate = self
+//        textVC.scrapsSendDelegate = self
 
 
         

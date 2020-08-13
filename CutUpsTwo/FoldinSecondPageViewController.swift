@@ -38,7 +38,7 @@ class FoldinSecondPageViewController: UIViewController{
     
     @objc func foldIn() {
         let vc = LyricsController()
-        vc.lyricScraps = firstHalfArray[0]
+        vc.lyricScraps.append("Cat")
         
         navigationController?.pushViewController(vc, animated: true)
         

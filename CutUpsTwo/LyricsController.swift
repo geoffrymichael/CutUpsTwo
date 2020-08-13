@@ -8,15 +8,15 @@
 
 import UIKit
 
-protocol SendScrapsArrayDelegate: class {
-    func onSend(scraps: [String])
-}
+//protocol SendScrapsArrayDelegate: class {
+//    func onSend(scraps: [String])
+//}
 
 class LyricsController: UITableViewController, UITableViewDragDelegate, UITableViewDropDelegate {
     
 //    var scraps = ["If there is a bustle in your headgrow", "Dont't be alarmed then", "It's only a sprinkling for the may queen", "There's a lady who's sure", "And she's buying a stairway to heaven", "Rings of smoke through the trees"]
     
-    weak var scrapsSendDelegate: SendScrapsArrayDelegate?
+//    weak var scrapsSendDelegate: SendScrapsArrayDelegate?
     
     
     let scrapCell = "scrapCell"
@@ -32,6 +32,8 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Shuffle", style: .plain, target: self, action: #selector(onShuffle))
         
 //        let shuffleButton = UIBarButtonItem(title: "Shuffle", style: .done, target: self, action: #selector(onShuffle))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .done, target: self, action: #selector(back))
+        
         
         let shuffleButton = UIBarButtonItem(image: UIImage(systemName: "shuffle"), style: .plain, target: self, action: #selector(onShuffle))
         
@@ -56,6 +58,19 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
         
         
         tableView.register(ScrapTableViewCell.self, forCellReuseIdentifier: scrapCell)
+    }
+    
+    
+    @objc func back() {
+        print("back button was pressed" )
+        
+        let vc = TextInputController()
+        
+        vc.textScraps.array = lyricScraps
+        
+        navigationController?.pushViewController(vc, animated: true)
+        
+        
     }
     
     @objc func onShuffle() {
@@ -166,17 +181,17 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
     }
     
     //TODO: This is to do stuff when the view dismisses. Currently it is empty 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        if self.isMovingFromParent {
-            
-            self.dismiss(animated: true, completion: {
-                print("something")
-                self.scrapsSendDelegate?.onSend(scraps: self.lyricScraps)
-            })
-        }
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//
+//
+//
+//            self.dismiss(animated: true, completion: {
+//                print("something")
+//                self.scrapsSendDelegate?.onSend(scraps: self.lyricScraps)
+//            })
+//
+//    }
     
     //Delete functionality
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -259,6 +274,7 @@ extension MutableCollection {
         }
     }
 }
+
 
 
 
