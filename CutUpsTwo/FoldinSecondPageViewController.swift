@@ -22,7 +22,11 @@ class FoldinSecondPageViewController: UIViewController{
     
     
     override func viewDidAppear(_ animated: Bool) {
-        childVC.placeholderLabel.text = "Add a second page that will be folded together with he first"
+        childVC.placeholderLabel.text = """
+        
+        Add a second page of text here that will be folded together with the first. Click on "Fold-in" to see the resultant text on the editing board. 
+        
+        """
     }
     
     
@@ -33,9 +37,11 @@ class FoldinSecondPageViewController: UIViewController{
         
         self.addChild(childVC)
         
-        let foldInButton = UIBarButtonItem(title: "Foldin", style: .plain, target: self, action: #selector(foldIn))
+        let foldInButton = UIBarButtonItem(title: "Fold-in", style: .plain, target: self, action: #selector(foldIn))
         
-        self.navigationItem.setRightBarButton(foldInButton, animated: true)
+        let cameraButton = UIBarButtonItem(image: UIImage(systemName: "camera"), style: .plain, target: self, action: #selector(onCamera))
+        
+        self.navigationItem.setRightBarButtonItems([foldInButton, cameraButton], animated: true)
         
         
         print(firstHalfArray)
@@ -43,10 +49,15 @@ class FoldinSecondPageViewController: UIViewController{
         print(fromTextInput, "this is from the very first textinput controller" )
     }
     
+    
+    
+    @objc func onCamera() {
+        childVC.onCamera()
+    }
+    
+    
     @objc func foldIn() {
-        
-        
-        
+
         
         print("Foldin has been pressed")
         

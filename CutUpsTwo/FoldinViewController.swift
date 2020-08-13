@@ -18,7 +18,13 @@ class FoldinViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        vc.placeholderLabel.text = "First Page of Book Here"
+        vc.placeholderLabel.text = """
+        
+        According to Wikipedia, a Fold-in is the technique of taking two sheets of linear text (with the same linespacing), folding each sheet in half vertically and combining with the other, then reading across the resulting page
+        
+        Please enter the first page of your text here and then click "Second Page" to enter the second page
+        
+        """
     }
     
     override func viewDidLoad() {
@@ -32,10 +38,17 @@ class FoldinViewController: UIViewController {
         
         let secondPageButton = UIBarButtonItem(title: "Second Page", style: .plain, target: self, action: #selector(secondPage))
         
-        self.navigationItem.rightBarButtonItem = secondPageButton
+        let cameraButton = UIBarButtonItem(image: UIImage(systemName: "camera"), style: .plain, target: self, action: #selector(onCamera))
+        
+        self.navigationItem.setRightBarButtonItems([secondPageButton, cameraButton], animated: true)
         
     }
     
+    
+    @objc func onCamera() {
+        vc.onCamera()
+        
+    }
     
     @objc func secondPage() {
         

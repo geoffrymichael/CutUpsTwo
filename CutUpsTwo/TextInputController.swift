@@ -47,7 +47,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
     
         self.lyricTextView.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
         
-        let edit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: Selector(("handleSend")))
+        let edit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(handleSend))
         self.navigationItem.leftBarButtonItem = edit
         
         
@@ -60,10 +60,10 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
         
         let cameraButton = UIBarButtonItem(image: UIImage(systemName: "camera"), style: .plain, target: self, action: #selector(onCamera))
         
-        let foldInButton = UIBarButtonItem(title: "Foldin", style: .plain, target: self, action: #selector(foldIn))
+        let foldInButton = UIBarButtonItem(title: "Fold-in", style: .plain, target: self, action: #selector(foldIn))
         
         
-        self.navigationItem.setRightBarButtonItems([helpButton, randomButton, cameraButton, automaticButton, foldInButton], animated: true)
+        self.navigationItem.setRightBarButtonItems([helpButton, randomButton, cameraButton, foldInButton, automaticButton], animated: true)
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(clipboardChanged),
