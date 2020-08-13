@@ -1,29 +1,40 @@
 # CutUpsTwo
 
+Version 2.6
+
+Added different cut-up algorithms-- currently the options are to split text by individual lines(carraige-returns), by single words, by every third word, and by evrey fifth worth. 
+
+
 Version 2.4
+06/15/2020
 
 Implemented the ability to scan and recognize text from still images from iOS photo library. 
 
 Updated algorithm to provide more and better text data for random feature.
 
 
-
 Version 2.1
+05/01/2020
 
 Added support to fetch a random line of text from a random book from Project Gutenberg.
 
+Version 2.0 
+03/28/2020
 
-March 28 2020
-
-Version 2.0 Deployed to the App Store. This version includes Core ML/Core Vision functionality to be able to scan physical text sources and convert them into digital text as an additional source. 
+This version includes Core ML/Core Vision functionality to be able to scan physical text sources and convert them into digital text as an additional source. 
 
 
-March 22, 2020 Version 1.2.0
+Version 1.2.0 
+03/22/2020
 
 Added support for Dark Mode
 
 
-Version 1.0 was accepted and is on the apps store.
+Version 1.0
+03/21/2020
+
+App acceppted and released on the App Store
+
 
 Status: March 20, 2020
 
