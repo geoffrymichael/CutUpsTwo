@@ -86,6 +86,9 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
     @objc func foldIn() {
         let vc = FoldinViewController()
         
+        vc.fromTextInput = textScraps.array
+        
+        
         navigationController?.pushViewController(vc, animated: true)
     }
     

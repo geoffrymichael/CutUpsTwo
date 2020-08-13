@@ -11,7 +11,7 @@ import UIKit
 
 class FoldinViewController: UIViewController {
     
-    
+    var fromTextInput = ScrapsToShareData().array
     
     let vc = TextInputController()
     
@@ -23,6 +23,8 @@ class FoldinViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(fromTextInput)
         
         view.addSubview(vc.view)
         
@@ -78,6 +80,8 @@ class FoldinViewController: UIViewController {
         
         
         let vc = FoldinSecondPageViewController()
+        
+        vc.fromTextInput = self.fromTextInput
         
         vc.firstHalfArray = halfArray
         

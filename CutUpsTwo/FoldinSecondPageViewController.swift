@@ -11,7 +11,12 @@ import UIKit
 
 class FoldinSecondPageViewController: UIViewController{
     
+    
+    var fromTextInput = ScrapsToShareData().array
+    
     var firstHalfArray = [[String]]()
+    
+    
     
     let childVC = TextInputController()
     
@@ -34,13 +39,12 @@ class FoldinSecondPageViewController: UIViewController{
         
         
         print(firstHalfArray)
+        
+        print(fromTextInput, "this is from the very first textinput controller" )
     }
     
     @objc func foldIn() {
-        let vc = LyricsController()
-        vc.lyricScraps.append("Cat")
         
-        navigationController?.pushViewController(vc, animated: true)
         
         
         
@@ -91,7 +95,15 @@ class FoldinSecondPageViewController: UIViewController{
             
         }
         
-        print(combinedArray)
+        fromTextInput.append(contentsOf: combinedArray)
+        
+        
+        let vc = LyricsController()
+        
+        vc.lyricScraps = fromTextInput
+        
+        navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     
