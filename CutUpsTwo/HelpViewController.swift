@@ -48,6 +48,8 @@ class HelpViewController: UIViewController, UITextViewDelegate {
 
     •) Pick a Cut-up option by clicking on the scissors icon. A single line is anything separated by a "carraige return". Most text pasted from the interenet will have new line formatting in them already. You can also use the iOS keyboard to add new line separations manually. The options of single words, every fifth word,  and every third word will split the text into their respective sizes. Once the text is cut it will be sent to the editing board which you can access by clicking the Edit button.
 
+    •) A Fold-in is another option you can use. This is a method by which two separate pages of text are "folded" together. Imagine taking page one of a book and ripping it out and folding it down the middle and laying it down so only the first half of that page is showing. Now imagine taking, say, page one-hundred of that same book, folding it down the middle and laying it down so that only the seccond half of that page is showing. Now place the first folded page next to the second folded page and read across the lines as if they were a single page. See what happens.
+
     •) Feel free to type in extra lines on the fly or edit existing lines using the keyboard.
     
     •) Copying and pasting from different sources is a good way to get interesting blends.

@@ -20,13 +20,16 @@ class FoldinSecondPageViewController: UIViewController{
     
     let childVC = TextInputController()
     
-    
-    override func viewDidAppear(_ animated: Bool) {
+       
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
         childVC.placeholderLabel.text = """
         
-        Add a second page of text here that will be folded together with the first. Click on "Fold-in" to see the resultant text on the editing board. 
+        Add a second page of text here that will be folded together with the first. Click on "Fold-in" to see the resultant text on the editing board.
         
         """
+        
     }
     
     

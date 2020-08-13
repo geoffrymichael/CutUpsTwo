@@ -255,7 +255,9 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
                                 """
                                 Type or copy/paste in some text.
 
-                                Click on the scissors to cut the text into chuncks.
+                                Click on the scissors to cut the text by specific sizes.
+
+                                Or click Fold-in to "fold" two pages of texts together. 
 
                                 Click on edit to rearrange the chunks into new and intersting ideas.
 
