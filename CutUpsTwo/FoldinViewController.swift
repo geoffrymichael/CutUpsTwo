@@ -60,7 +60,7 @@ class FoldinViewController: UIViewController {
         }
         
         
-        var fullArray = [[String]]()
+        var halfArray = [[String]]()
         
         for (_, line) in linesByWordsArray.enumerated() {
 
@@ -68,13 +68,22 @@ class FoldinViewController: UIViewController {
                            
             print(fullLine.split().left)
             
-            fullArray.append(fullLine.split().left)
+            halfArray.append(fullLine.split().left)
+            
             
 
         }
         
         
-        print(fullArray)
+        
+        
+        let vc = FoldinSecondPageViewController()
+        
+        vc.firstHalfArray = halfArray
+        
+        navigationController?.pushViewController(vc, animated: true)
+        
+        print(halfArray)
 //        let firstLine = byLineArray[3].components(separatedBy: " ")
 //        
 //        print(firstLine.count / 2)
