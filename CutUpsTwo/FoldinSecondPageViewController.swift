@@ -46,7 +46,54 @@ class FoldinSecondPageViewController: UIViewController{
         
         print("Foldin has been pressed")
         
+        splitSeccondAndJoinWithFirst()
+        
         
     }
+    
+    func splitSeccondAndJoinWithFirst() {
+        
+        var combinedArray = [String]()
+        
+        var byLineArray = [String]()
+             
+             childVC.lyricTextView.text.enumerateLines { line, _ in
+                 
+                 byLineArray.append(line)
+        
+             }
+             
+             var linesByWordsArray: [String] = []
+             
+             for (_, line) in byLineArray.enumerated() {
+                 linesByWordsArray.append(line)
+             }
+             
+             
+             var secondHalfArray = [[String]]()
+             
+             for (_, line) in linesByWordsArray.enumerated() {
+
+                 let fullLine = line.components(separatedBy: " ")
+                 
+                 secondHalfArray.append(fullLine.split().right)
+              
+             }
+        
+        
+        
+        for (index, line) in firstHalfArray.enumerated() {
+//            combinedArray.append(lineOne.joined(separator: " "))
+            if index < secondHalfArray.count {
+                let combinedLine = "\(line.joined(separator: " "))" + " \(secondHalfArray[index].joined(separator: " "))"
+                combinedArray.append(combinedLine)
+            }
+            
+        }
+        
+        print(combinedArray)
+    }
+    
+    
     
 }
