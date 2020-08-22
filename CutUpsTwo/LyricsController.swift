@@ -8,6 +8,55 @@
 
 import UIKit
 
+class FilesManager {
+    enum Error: Swift.Error {
+        case fileAlreadyExists
+        case invalidDirectory
+        case writtingFailed
+        case fileNotExists
+        case readingFailed
+    }
+    let fileManager: FileManager
+    init(fileManager: FileManager = .default) {
+        self.fileManager = fileManager
+    }
+    func save(fileNamed: String, data: Data) throws {
+        guard let url = makeURL(forFileNamed: fileNamed) else {
+            throw Error.invalidDirectory
+        }
+       
+        do {
+            try data.write(to: url, options: .atomic)
+        } catch {
+            debugPrint(error)
+            throw Error.writtingFailed
+        }
+    }
+    private func makeURL(forFileNamed fileName: String) -> URL? {
+        
+        guard let url = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return nil
+        }
+        return url.appendingPathComponent(fileName)
+    }
+    
+    func read(fileNamed: String) throws -> Data {
+        guard let url = makeURL(forFileNamed: fileNamed) else {
+            throw Error.invalidDirectory
+        }
+        guard fileManager.fileExists(atPath: url.absoluteString) else {
+            throw Error.fileNotExists
+        }
+        do {
+            return try Data(contentsOf: url)
+        } catch {
+            debugPrint(error)
+            throw Error.readingFailed
+        }
+    }
+    
+}
+
 //protocol SendScrapsArrayDelegate: class {
 //    func onSend(scraps: [String])
 //}
@@ -44,7 +93,13 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
 //        let clearButton = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(onClear))
         
         let clearButton = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain, target: self, action: #selector(onClear))
-        self.navigationItem.setRightBarButtonItems([clearButton,shareButton,shuffleButton], animated: true)
+        
+        let saveButton = UIBarButtonItem(image: UIImage(systemName: "arrow.down.doc.fill"), style: .plain, target: self, action: #selector(onSave))
+        
+        let loadButton = UIBarButtonItem(image: UIImage(systemName: "arrow.up.doc.fill"), style: .plain, target: self, action: #selector(onLoad))
+        
+        
+        self.navigationItem.setRightBarButtonItems([clearButton,shareButton,shuffleButton, saveButton, loadButton], animated: true)
         
         //This is needed to account for safe area. For now, the app is portrait mode only so this is commented out
 //        if UIDevice.current.orientation.isLandscape {
@@ -120,6 +175,47 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
         
          
     }
+    
+    @objc func onSave() {
+        
+                
+        let scrapsShare = ScrapsToShareData()
+        
+        scrapsShare.array = lyricScraps
+        
+        let fileManager = FilesManager()
+        
+        
+        do {
+            let data = scrapsShare.json
+            print(data as Any)
+            try fileManager.save(fileNamed: "EditingBoard", data: data!)
+        } catch {
+            print("Something went wrong")
+        }
+        
+        
+        
+        print("save was pressed")
+        
+   
+    }
+    
+    @objc func onLoad() {
+        let fileManager = FilesManager()
+        
+        do {
+            let data = try fileManager.read(fileNamed: "EditingBoard")
+            print(data, "well at least its not an error")
+        } catch {
+            print(error)
+        }
+        
+        
+        
+        
+    }
+    
     
     //To account for safe area in landscape mode. for now the app is portrait mode only so this is commented out
 //    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {

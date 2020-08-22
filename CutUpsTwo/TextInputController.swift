@@ -10,8 +10,12 @@ import UIKit
 import Vision
 import VisionKit
 
-class ScrapsToShareData {
+class ScrapsToShareData: Codable {
     var array: [String] = []
+    
+    var json: Data? {
+        return try? JSONEncoder().encode(self)
+    }
 }
 
 class TextInputController: UIViewController, UITextViewDelegate, UINavigationControllerDelegate  {
