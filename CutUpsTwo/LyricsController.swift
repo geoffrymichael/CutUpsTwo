@@ -44,7 +44,7 @@ class FilesManager {
         guard let url = makeURL(forFileNamed: fileNamed) else {
             throw Error.invalidDirectory
         }
-        //Read was failing here at check if file exists. I presume i am cchecking in the wrong location as it appears the do statement below it is able to retrieve data.
+        //Read was failing here at check if file exists. I presume i am cchecking in the wrong location as it appears the do statement below it is able to retrieve data. 
 //        guard fileManager.fileExists(atPath: url.absoluteString) else {
 //            throw Error.fileNotExists
 //        }
