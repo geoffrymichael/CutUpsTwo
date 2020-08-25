@@ -26,7 +26,7 @@ class FilesManager {
         }
        
         do {
-            try data.write(to: url, options: .atomic)
+            try data.write(to: url, options: .atomicWrite)
         } catch {
             debugPrint(error)
             throw Error.writtingFailed
@@ -44,9 +44,10 @@ class FilesManager {
         guard let url = makeURL(forFileNamed: fileNamed) else {
             throw Error.invalidDirectory
         }
-        guard fileManager.fileExists(atPath: url.absoluteString) else {
-            throw Error.fileNotExists
-        }
+        //Read was failing here at check if file exists. I presume i am cchecking in the wrong location as it appears the do statement below it is able to retrieve data.
+//        guard fileManager.fileExists(atPath: url.absoluteString) else {
+//            throw Error.fileNotExists
+//        }
         do {
             return try Data(contentsOf: url)
         } catch {
@@ -206,6 +207,13 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
         
         do {
             let data = try fileManager.read(fileNamed: "EditingBoard")
+            
+            let decoder = JSONDecoder()
+            
+            let loadedLines = try? decoder.decode(ScrapsToShareData.self, from: data)
+            
+            print(loadedLines as Any, "This is your loaded line")
+            
             print(data, "well at least its not an error")
         } catch {
             print(error)
