@@ -32,6 +32,19 @@ class FilesManager {
             throw Error.writtingFailed
         }
     }
+    
+    func delete(fileNamed: String) throws {
+        guard let url = makeURL(forFileNamed: fileNamed) else {
+            throw Error.fileNotExists
+        }
+        
+        do {
+            try fileManager.removeItem(at: url)
+        } catch {
+            print("error deleting")
+        }
+    }
+    
     private func makeURL(forFileNamed fileName: String) -> URL? {
         
         guard let url = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
@@ -77,6 +90,11 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if lyricScraps.isEmpty {
+            onLoad()
+        }
+        
         
         
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Shuffle", style: .plain, target: self, action: #selector(onShuffle))
@@ -172,6 +190,15 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
             self.tableView.reloadData()
         }))
         
+        let fileManager = FilesManager()
+        
+        
+        do {
+            try fileManager.delete(fileNamed: "EditingBoard")
+        } catch {
+            print("asdklkasddsfksdlklkslkd")
+        }
+        
         
         
          
@@ -213,6 +240,8 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
             let loadedLines = try? decoder.decode(ScrapsToShareData.self, from: data)
             
             print(loadedLines as Any, "This is your loaded line")
+            
+            lyricScraps = loadedLines?.array ?? ["cat","dog","chicken"]
             
             print(data, "well at least its not an error")
         } catch {
