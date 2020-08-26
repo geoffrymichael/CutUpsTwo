@@ -113,12 +113,12 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
         
         let clearButton = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain, target: self, action: #selector(onClear))
         
-        let saveButton = UIBarButtonItem(image: UIImage(systemName: "arrow.down.doc.fill"), style: .plain, target: self, action: #selector(onSave))
+        let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(onSave))
         
-        let loadButton = UIBarButtonItem(image: UIImage(systemName: "arrow.up.doc.fill"), style: .plain, target: self, action: #selector(onLoad))
+//        let loadButton = UIBarButtonItem(image: UIImage(systemName: "arrow.up.doc.fill"), style: .plain, target: self, action: #selector(onLoad))
         
         
-        self.navigationItem.setRightBarButtonItems([clearButton,shareButton,shuffleButton, saveButton, loadButton], animated: true)
+        self.navigationItem.setRightBarButtonItems([clearButton,shareButton,shuffleButton, saveButton], animated: true)
         
         //This is needed to account for safe area. For now, the app is portrait mode only so this is commented out
 //        if UIDevice.current.orientation.isLandscape {
@@ -214,13 +214,17 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
         let fileManager = FilesManager()
         
         
-        do {
-            let data = scrapsShare.json
-            print(data as Any)
-            try fileManager.save(fileNamed: "EditingBoard", data: data!)
-        } catch {
-            print("Something went wrong")
+        if !scrapsShare.array.isEmpty { //So that empty data is not saved
+            do {
+                let data = scrapsShare.json
+                print(data as Any)
+                try fileManager.save(fileNamed: "EditingBoard", data: data!)
+            } catch {
+                print("Something went wrong")
+            }
         }
+        
+        
         
         
         

@@ -25,8 +25,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //         Use a UIHostingController as window root view controller.
         
         if let windowScene = scene as? UIWindowScene {
+            let fileManager = FilesManager()
+            
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UINavigationController(rootViewController: TextInputController())
+            
+            do {
+                let _ = try fileManager.read(fileNamed: "EditingBoard")
+                window.rootViewController = UINavigationController(rootViewController: LyricsController())
+            } catch {
+                window.rootViewController = UINavigationController(rootViewController: TextInputController())
+                print(error)
+            }
+            
+            
+//            window.rootViewController = UINavigationController(rootViewController: TextInputController())
             self.window = window
             window.makeKeyAndVisible()
         }
