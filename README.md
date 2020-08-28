@@ -1,5 +1,10 @@
 # CutUpsTwo
 
+Version 3.5
+08/27/2020
+
+Simple CRUD persistence implemented via the File Manager API. You can save your cut-up on the editing board. The delete method will also clear the document from the file system. Also, the view controller the app opens on is dependent on whether you currently have a saved document or not. 
+
 Version 3.0
 08/14/2020
 
