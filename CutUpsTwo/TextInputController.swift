@@ -264,6 +264,8 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
                                 Click on random to get a random snippet of a passage from an old book. (This feature requires that you be connected to the internet)
 
                                 Blend it all together and cut-it-up to make something new. How fun.
+
+                                You can click on "Save" in the editing board to save your current cut-up to work on later if you wish.
                                 
                                 Click the ⏍ button to export your Cut-up to your favorite notes app, a text, etc.
                                 

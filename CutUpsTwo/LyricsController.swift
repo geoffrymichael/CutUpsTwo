@@ -117,7 +117,7 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
     
     @objc func onClear() {
         
-        let alert = UIAlertController(title: "Are you sure you want to delete your Cut-Up?", message: "If you haven't shared it, your data will be lost", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Are you sure you want to delete your Cut-Up?", message: "If you haven't shared it, your data will be lost. This will also clear delete your current cut-up even if it is saved", preferredStyle: .alert)
 
         
         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))

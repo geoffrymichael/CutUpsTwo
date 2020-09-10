@@ -63,6 +63,8 @@ class HelpViewController: UIViewController, UITextViewDelegate {
     •) Rearranging can be done manually by dragging and dropping lines, or automatically by clicking the 🔀 button. You can press shuffle as many times as you wish.
     
     •) You can go back to the input screen and add more content at any time.
+
+    •) Clicking on "Save" on the editing board will allow you to save your current cut-up to work on later. 
     
     •) Export your rearranged lines via the ⏍ button.
 
