@@ -76,6 +76,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
         
 
         setupLyricTextView()
+        setupGutenbergCitationView()
         setupVision()
         
     
@@ -235,7 +236,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
        }
     
    
-    //MARK: Laybout textview on first load with temporary instructions underlay and activity indicator
+    //MARK: Layout textview on first load with temporary instructions underlay and activity indicator
     lazy var lyricTextView: UITextView = {
         let view = UITextView()
 
@@ -329,12 +330,51 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
         
         ])
         
-        textViewBottomanchor = lyricTextView.bottomAnchor.constraint(equalTo: margins.bottomAnchor)
+        textViewBottomanchor = lyricTextView.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -100)
         textViewBottomanchor?.isActive = true
         
         placeholderLabel.widthAnchor.constraint(equalTo: lyricTextView.widthAnchor).isActive = true
         
         
+    }
+    
+    var gutenbergCitationView: UITextView = {
+        let view = UITextView()
+        
+        view.backgroundColor = UIColor.red
+        
+        view.text = "I am the citation view"
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+        
+        
+    }()
+    
+    func setupGutenbergCitationView() {
+        let margins = view.layoutMarginsGuide
+        
+        view.addSubview(gutenbergCitationView)
+
+        
+        gutenbergCitationView.topAnchor.constraint(equalTo: lyricTextView.bottomAnchor).isActive = true
+        gutenbergCitationView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        gutenbergCitationView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+                
+                
+                NSLayoutConstraint.activate([
+                    lyricTextView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+                    lyricTextView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+                    lyricTextView.widthAnchor.constraint(equalTo: margins.widthAnchor),
+                    lyricTextView.topAnchor.constraint(equalTo: margins.topAnchor),
+        //            lyricTextView.bottomAnchor.constraint(equalTo: margins.bottomAnchor)
+                
+                ])
+        view.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
+        
+      
+        print("I am trying to setup a subview for gutenberg")
     }
     
    
@@ -386,6 +426,8 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
             
             let url = "http://www.gutenberg.org/cache/epub/\(rando)/pg\(rando).txt"
             let session = URLSession.shared
+        
+            
             
         activityIN.startAnimating()
             session.dataTask(with: URL(string: url)!) { (data, response, error) in
@@ -411,10 +453,20 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
 
                     DispatchQueue.main.async {
                         self.activityIN.stopAnimating()
+                        
+                        self.setupGutenbergCitationView()
                         self.placeholderLabel.text = ""
                         
                         self.lyricTextView.text = substring
-                       
+                        
+                        if myString[0].count > 1 {
+                            self.gutenbergCitationView.text = "From \(myString[0])"
+                            
+                        } else {
+                            self.gutenbergCitationView.text = "Citation could not be found"
+                        }
+                        
+                        
 
                     }
                     
