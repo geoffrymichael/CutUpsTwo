@@ -76,7 +76,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
         
 
         setupLyricTextView()
-        setupGutenbergCitationView()
+        
         setupVision()
         
     
@@ -338,12 +338,11 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
         
     }
     
+    // MARK: Gutenberg Citation View
     var gutenbergCitationView: UITextView = {
         let view = UITextView()
         
-        view.backgroundColor = UIColor.red
-        
-        view.text = "I am the citation view"
+//        view.backgroundColor = UIColor.red
         
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -459,14 +458,14 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
                         
                         self.lyricTextView.text = substring
                         
-                        if myString[0].count > 1 {
+                        if myString[0].count > 1		 {
                             self.gutenbergCitationView.text = "From \(myString[0])"
                             
                         } else {
                             self.gutenbergCitationView.text = "Citation could not be found"
                         }
                         
-                        
+                        self.setupGutenbergCitationView()
 
                     }
                     
