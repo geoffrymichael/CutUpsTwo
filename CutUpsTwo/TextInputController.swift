@@ -346,7 +346,6 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
     var gutenbergCitationView: UITextView = {
         let view = UITextView()
         
-        view.backgroundColor = UIColor.red
         
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -427,7 +426,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
             
             let rando = Int.random(in: 0...1600)
             
-            let url = "http://www.gutenberg.org/cache/epub/\(rando)/pg\(rando).txt"
+            let url = "https://www.gutenberg.org/cache/epub/\(rando)/pg\(rando).txt"
             let session = URLSession.shared
         
             
@@ -452,7 +451,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
                     let myString = str.components(separatedBy: .newlines)
                     
                     // Print source author and work of gutenberg text
-                    print(myString[0])
+                    print(myString[0...1], randomInt)
 
                     DispatchQueue.main.async {
                         self.activityIN.stopAnimating()
@@ -463,7 +462,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
                         self.lyricTextView.text = substring
                         
                         if myString[0].count > 1		 {
-                            self.gutenbergCitationView.text = "From \(myString[0])"
+                            self.gutenbergCitationView.text = "From: \(myString[0]), https://www.gutenberg.org/cache/epub/\(rando)/pg\(rando).txt"
                             
                         } else {
                             self.gutenbergCitationView.text = "Citation could not be found"
