@@ -206,7 +206,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
         
         let keyBoardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
-        textViewBottomanchor?.constant = -keyBoardHeight.height - 50
+        textViewBottomanchor?.constant = -keyBoardHeight.height - 60
         
         
         
