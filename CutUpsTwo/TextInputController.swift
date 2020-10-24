@@ -206,7 +206,10 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
         
         let keyBoardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
-        textViewBottomanchor?.constant = -keyBoardHeight.height
+        textViewBottomanchor?.constant = -keyBoardHeight.height - 50
+        
+        
+        
         
     }
     
@@ -214,7 +217,8 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
     @objc func handleKeyboardWillHide(notification: NSNotification) {
         let margins = view.layoutMargins
         
-        textViewBottomanchor?.constant = margins.bottom
+        textViewBottomanchor?.constant = margins.bottom - 100
+        setupGutenbergCitationView()
         lyricTextView.layoutIfNeeded()
         
     }
@@ -342,7 +346,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
     var gutenbergCitationView: UITextView = {
         let view = UITextView()
         
-//        view.backgroundColor = UIColor.red
+        view.backgroundColor = UIColor.red
         
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -608,6 +612,7 @@ extension UITextView {
         let barButton = UIBarButtonItem(title: title, style: .plain, target: target, action: selector)//3
         toolBar.setItems([flexible, barButton], animated: false)//4
         self.inputAccessoryView = toolBar//5
+        
     }
 }
 
