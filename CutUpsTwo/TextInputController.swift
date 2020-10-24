@@ -346,6 +346,7 @@ class TextInputController: UIViewController, UITextViewDelegate, UINavigationCon
     var gutenbergCitationView: UITextView = {
         let view = UITextView()
         
+        view.font = UIFont.systemFont(ofSize: 15)
         
         view.translatesAutoresizingMaskIntoConstraints = false
         
