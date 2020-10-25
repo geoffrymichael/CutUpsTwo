@@ -1,5 +1,9 @@
 # CutUpsTwo
 
+Version 3.6
+
+When using the Random feature, a citation for the source will now be displayed if available.
+
 Version 3.5
 08/27/2020
 
