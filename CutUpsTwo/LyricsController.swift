@@ -25,7 +25,11 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
     
     var scrapsToShareData = ScrapsToShareData()
     
-    lazy var lyricScraps = scrapsToShareData.array
+    lazy var lyricScraps = scrapsToShareData.array {
+        didSet {
+            save()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,12 +56,12 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
         
         let clearButton = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain, target: self, action: #selector(onClear))
         
-        let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(onSave))
+       
         
 //        let loadButton = UIBarButtonItem(image: UIImage(systemName: "arrow.up.doc.fill"), style: .plain, target: self, action: #selector(onLoad))
         
         
-        self.navigationItem.setRightBarButtonItems([clearButton,shareButton,shuffleButton, saveButton], animated: true)
+        self.navigationItem.setRightBarButtonItems([clearButton,shareButton,shuffleButton], animated: true)
         
         //This is needed to account for safe area. For now, the app is portrait mode only so this is commented out
 //        if UIDevice.current.orientation.isLandscape {
@@ -143,13 +147,14 @@ class LyricsController: UITableViewController, UITableViewDragDelegate, UITableV
          
     }
     
-    @objc func onSave() {
+    @objc func save() {
         
                 
         let scrapsShare = ScrapsToShareData()
         
         scrapsShare.array = lyricScraps
         
+        //TODO: Perhaps Think about using user defaults instead
         let fileManager = FilesManager()
         
         
